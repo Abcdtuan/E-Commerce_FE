@@ -1,0 +1,81 @@
+<!-- HTML Template -->
+<div class="product-list-container">
+    <div class="page-header">
+        <h1 class="page-title">Quản lý sản phẩm</h1>
+        <p class="page-subtitle">Tìm kiếm và quản lý tất cả sản phẩm của bạn</p>
+    </div>
+
+    <div class="search-section">
+        <form [formGroup]="searchProducts" (ngSubmit)="submitSearch()" class="search-form">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-label>Tìm kiếm sản phẩm</mat-label>
+                <input matInput formControlName="title" placeholder="Tìm kiếm sản phẩm*" />
+                <button mat-icon-button matSuffix type="submit">
+                <mat-icon>search</mat-icon>
+                </button>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" class="search-button">
+                <mat-icon>search</mat-icon>
+                <span>Tìm Kiếm</span>
+            </button>
+        </form>
+
+    </div>
+
+    <div class="products-grid">
+        <mat-card class="product-card" *ngFor="let product of products">
+            <div class="product-image-container">
+                <img [src]="product.processedImg" alt="product-image" class="product-image">
+                <div class="image-overlay">
+                    <mat-icon>visibility</mat-icon>
+                </div>
+            </div>
+            
+            <mat-card-content class="product-content">
+                <div class="product-header">
+                    <h2 class="product-name">{{ product.name }}</h2>
+                </div>
+
+                <mat-divider class="custom-divider"></mat-divider>
+
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="info-label">
+                            <mat-icon class="info-icon">attach_money</mat-icon>
+                            Giá bán:
+                        </span>
+                        <span class="info-value-price">{{ product.price | number:'1.0-0' }} VND</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">
+                            <mat-icon class="info-icon">category</mat-icon>
+                            Danh mục:
+                        </span>
+                        <mat-chip class="category-chip">{{ product.categoryName }}</mat-chip>
+                    </div>
+                </div>
+
+                <mat-divider class="custom-divider"></mat-divider>
+
+                <mat-card-actions class="product-actions">
+                    <button mat-raised-button class="action-btn btn-faq"
+                            [routerLink]="'admin/faq' + '/' + product.id">
+                        <mat-icon>help_outline</mat-icon>
+                        FAQ
+                    </button>
+                    <button mat-raised-button class="action-btn btn-update"
+                            [routerLink]="'admin/product' + '/' + product.id">
+                        <mat-icon>edit</mat-icon>
+                        Sửa
+                    </button>
+                    <button mat-raised-button class="action-btn btn-delete" 
+                            (click)="deleteProduct(product.id)">
+                        <mat-icon>delete</mat-icon>
+                        Xóa
+                    </button>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

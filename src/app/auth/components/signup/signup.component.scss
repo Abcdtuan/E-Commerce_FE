@@ -1,0 +1,63 @@
+.signup-container {
+  max-width: 450px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+}
+
+mat-card {
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #cfd1d9 0%, #ffffff 100%);
+  color: #fff;
+}
+
+mat-card-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+mat-card-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Form field */
+mat-form-field {
+  width: 100%;
+}
+
+/* Input */
+input.mat-input-element {
+  color: #000;
+  font-weight: 500;
+}
+
+/* Placeholder */
+::ng-deep input::placeholder {
+  opacity: 0.6;
+  color: #888;
+}
+
+/* Icon button */
+button[mat-icon-button] {
+  color: #555;
+}
+
+/* Submit button */
+button[type="submit"] {
+  margin-top: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Error style */
+mat-error {
+  font-size: 0.8rem;
+  color: #ff5252;
+}

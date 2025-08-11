@@ -48,6 +48,19 @@ export class AdminService {
     });
   }
 
+  createCoupon(couponDto: any): Observable<any>{
+    return this.http.post(BASIC_URL + "/api/admin/coupon", couponDto,{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+  getAllCoupons(): Observable<any>{
+    return this.http.get(BASIC_URL + "/api/admin/coupons",{
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+
 
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(

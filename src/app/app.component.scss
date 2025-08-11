@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
-  background: rgb(233, 109, 52);
+  background: rgb(39, 36, 36);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
@@ -80,8 +80,8 @@
 
 /* Style cho active state */
 .navbar button.active {
-  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-  border-color: #ff6b6b;
+  background: rgb(141, 141, 129);
+  border-color: #ebe5e5;
   color: white;
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }

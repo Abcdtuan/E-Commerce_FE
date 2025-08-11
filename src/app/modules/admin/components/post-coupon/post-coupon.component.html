@@ -1,0 +1,46 @@
+<div class="container">
+    <form [formGroup]="couponForm" (ngSubmit)="addCoupon()">
+        <h2>Add Coupon</h2>
+        <div class="file-uoload-container">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Tên giảm giá</mat-label>
+                <input matInput type ="text" formControlName="name" placeholder="Nhập tên giảm giá" />
+                <mat-error *ngIf="couponForm.get('name')?.hasError('required')">
+                    Bắt buộc phải nhập tên sản phẩm.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Code</mat-label>
+                <input matInput type="text" formControlName="code" placeholder="Nhập mã code" />
+                <mat-error *ngIf="couponForm.get('code')?.hasError('required')">
+                    Bắt buộc phải nhập mã code.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Giảm giá %</mat-label>
+                <input matInput type="number" formControlName="discount" placeholder="Nhập discount" />
+                <mat-error *ngIf="couponForm.get('discount')?.hasError('required')">
+                    Bắt buộc phải nhập discount.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Ngày hết hạn</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="expirationDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="couponForm.get('expirationDate')?.hasError('required')">
+                    Bắt buộc phải nhập ngày hết hạn.
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit">
+                Thêm Mã
+            </button>
+
+        </div>
+    </form>
+</div>

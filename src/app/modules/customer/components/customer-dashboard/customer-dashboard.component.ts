@@ -17,7 +17,7 @@ import { CustomerService } from '../../service/customer.service';
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, RouterLink, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule],
+  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.scss'
 })
@@ -72,5 +72,7 @@ export class CustomerDashboardComponent {
     }
     })
   }
+
+  
 
 }

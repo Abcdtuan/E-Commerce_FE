@@ -18,7 +18,7 @@ export class CustomerService {
   }
 
   getAllProductsByName(title: any): Observable<any> {
-    return this.http.get(BASIC_URL + `/api/customer/search/${title}`, {
+    return this.http.get(BASIC_URL + `/api/customer/products/search/${title}`, {
       headers: this.createAuthorizationheader()
     })
   }
@@ -40,11 +40,58 @@ export class CustomerService {
     })
   }
 
+  applyCoupon(couponId: any): Observable<any>{
+  const userId = UserStorageService.getUserId();
+  return this.http.post(
+    BASIC_URL + `/api/customer/cart/coupon/${userId}/${couponId}`,
+    {}, 
+    { headers: this.createAuthorizationheader() } 
+  );
+}
+
+
+  avaialableCoupons(): Observable<any>{
+    return this.http.get(BASIC_URL + '/api/customer/cart/coupons', {
+      headers: this.createAuthorizationheader()
+    })
+  }
+  increaseQuantity(productId: any): Observable<any> {
+    const CartDto = {
+      productId: productId,
+      userId: UserStorageService.getUserId()
+
+    }
+    return this.http.post(BASIC_URL + '/api/customer/cart/addition', CartDto, {
+      headers: this.createAuthorizationheader()
+    })
+  }
+  decreaseQuantity(productId: any): Observable<any> {
+    const CartDto = {
+      productId: productId,
+      userId: UserStorageService.getUserId()
+
+    }
+    return this.http.post(BASIC_URL + '/api/customer/cart/deduction', CartDto, {
+      headers: this.createAuthorizationheader()
+    })
+  }
+  deleteCartItem(cartItemsId: any): Observable<any> {
+    return this.http.delete(BASIC_URL + `/api/customer/cart/deletion/${cartItemsId}`, {
+      headers: this.createAuthorizationheader()
+    })
+
+  }
+
+  getProductById(id: number): Observable<any> {
+      return this.http.get(BASIC_URL + `/api/customer/products/${id}`, {
+        headers: this.createAuthorizationheader(),
+      });
+  }
+
   private createAuthorizationheader(): HttpHeaders{
     return new HttpHeaders().set(
       'Authorization', 'Bearer ' + UserStorageService.getToken()
     )
   }
-
 
 }

@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -12,12 +12,15 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from '../../service/customer.service';
+import { FooterComponent } from '../footer/footer.component';
+import { AdvertisementComponent } from '../advertisement/advertisement.component';
+
 
 
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule],
+  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule, FooterComponent, AdvertisementComponent, RouterModule],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.scss'
 })

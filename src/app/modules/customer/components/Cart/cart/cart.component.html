@@ -12,16 +12,20 @@
       <tbody>
         <tr *ngFor="let item of cartItems">
           <td class="product-cell">
-            <button><mat-icon style="color: crimson;">delete</mat-icon></button>
+            <button (click)="deleteCartItem(item.id)"><mat-icon style="color: crimson;">delete</mat-icon></button>
             <img [src]="item.processedImg" alt="product-image" />
             <span class="product-name">{{ item.productName }}</span>
           </td>
           <td>{{ item.price | currency:'VND':'symbol':'1.0-0' }}</td>
           <td>
             <div class="quantity-controls">
-              <button>-</button>
-              <span>{{ item.quantity }}</span>
-              <button>+</button>
+              <button mat-icon-button [disabled]="item.quantity == 1" (click)="decreaseQuantity(item.productId)">
+                <mat-icon>remove_circle_outline</mat-icon>
+              </button>
+              <span class="quantity">{{item.quantity}}</span>
+              <button mat-icon-button (click)="increaseQuantity(item.productId)">
+                <mat-icon>add_circle_outline</mat-icon>
+              </button>
             </div>
           </td>
           <td>{{ (item.price * item.quantity) | currency:'VND':'symbol':'1.0-0' }}</td>
@@ -35,7 +39,7 @@
       <h4>Tổng cộng giỏ hàng</h4>
       <div class="summary-row">
         <span>Tạm tính</span>
-        <span>{{ order.amount | currency:'VND':'symbol':'1.0-0' }}</span>
+        <span>{{ order?.totalAmount | currency:'VND':'symbol':'1.0-0' }}</span>
       </div>
       <div class="summary-row">
         <span>Vận chuyển</span>
@@ -43,7 +47,25 @@
       </div>
       <div class="summary-row total">
         <span>Tổng</span>
-        <span>{{ order.totalAmount | currency:'VND':'symbol':'1.0-0' }}</span>
+        <span>{{ order?.amount | currency:'VND':'symbol':'1.0-0' }}</span>
+      </div>
+      <div class="summary-row total" *ngIf="order?.couponName != null" > 
+        <span> Tên mã giảm:  {{ order?.couponName }}</span>
+      </div>
+      <div class="coupon">
+        <button mat-raised-button color="accent" (click)="availableCoupons()">
+          Chọn mã giảm giá
+        </button>
+
+        <div *ngIf="showCoupons" class="coupon-list">
+          <mat-list>
+            <mat-list-item *ngFor="let coupon of availableCouponList" (click)="applyCoupon(coupon.id)">
+              <span class="coupon-code">{{ coupon.code }}</span> - 
+              <span class="coupon-name">{{ coupon.name }}</span> 
+              (Giảm {{ coupon.discount }}%)
+            </mat-list-item>
+          </mat-list>
+        </div>
       </div>
       <button class="checkout-btn">Tiến hành thanh toán</button>
     </div>

@@ -1,0 +1,35 @@
+<div class="product-detail-container" *ngIf="product">
+
+  <div class="product-image-section">
+    <img [src]="existingImg" alt="img" class="product-image">
+  </div>
+
+  <div class="product-info-section">
+    <h1 class="product-title">{{ product.name }}</h1>
+    
+
+    <div class="product-price">
+      <span class="price-current">{{ product.price | number:'1.0-0' }}₫</span>
+      <span class="price-old" *ngIf="product.price">{{ product.price | number:'1.0-0' }}₫</span>
+    </div>
+
+    <div>
+      <span>
+        59 giải phóng, Hai Bà Trưng, Hà Nội - 0989400954
+      </span>
+    </div>
+     
+    
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="addProductToCart(product.id)">
+        Thêm vào giỏ hàng
+      </button>
+    </div>
+
+    <div class="category">
+      <span>Danh mục:</span> {{ product.categoryName}}
+    </div>
+
+  </div>
+</div>
+

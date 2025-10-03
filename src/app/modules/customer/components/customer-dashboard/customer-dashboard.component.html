@@ -1,8 +1,8 @@
-<!-- HTML Template -->
+
 <div class="product-list-container">
     <div class="page-header">
-        <h1 class="page-title">Quản lý sản phẩm</h1>
-        <p class="page-subtitle">Tìm kiếm và quản lý tất cả sản phẩm của bạn</p>
+        <app-advertisement></app-advertisement>
+        
     </div>
 
     <div class="search-section">
@@ -26,10 +26,8 @@
     <div class="products-grid">
         <mat-card class="product-card" *ngFor="let product of products">
             <div class="product-image-container">
-                <img [src]="product.processedImg" alt="product-image" class="product-image">
-                <div class="image-overlay">
-                    <mat-icon>visibility</mat-icon>
-                </div>
+                <img [src]="product.processedImg" alt="product-image" class="product-image" [routerLink]="'/customer/product-details/' + product.id">
+                
             </div>
             
             <mat-card-content class="product-content">
@@ -37,29 +35,19 @@
                     <h2 class="product-name">{{ product.name }}</h2>
                 </div>
 
-                <mat-divider class="custom-divider"></mat-divider>
-
                 <div class="product-info">
                     <div class="info-row">
                         <span class="info-label">
-                            <mat-icon class="info-icon">attach_money</mat-icon>
                             Giá bán:
                         </span>
                         <span class="info-value-price">{{ product.price | number:'1.0-0' }} VND</span>
                     </div>
                     <div class="info-row">
                         <span class="info-label">
-                            <mat-icon class="info-icon">category</mat-icon>
                             Danh mục:
                         </span>
-                        <span class="category-chip">{{ product.categoryName }}</span>
+                        <span >{{ product.categoryName }}</span>
                     </div>
-                </div>
-
-                <mat-divider class="custom-divider"></mat-divider>
-
-                <div class="actions">
-                    <button mat mat-raised-button class="" (click)="addProductToCart(product.id)">Thêm vào giỏ hàng</button>
                 </div>
 
                 
@@ -67,3 +55,5 @@
         </mat-card>
     </div>
 </div>
+
+<app-footer></app-footer>

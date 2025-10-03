@@ -1,93 +1,71 @@
 .login-container {
-  max-width: 450px;
-  margin: 3rem auto;
-  padding: 1.5rem;
+  height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Ảnh nền */
+  background: url('/assets/BackGroundIamge3.jpg') no-repeat center center / cover;
+  position: relative;
 }
 
 mat-card {
-  padding: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(135deg, #cfd1d9 0%, #ffffff 100%);
+  width: 400px;
+  padding: 24px;
+  border-radius: 16px;
+
+  /* Làm card trong mờ + hiệu ứng nổi */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
   color: #fff;
 }
 
 mat-card-title {
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 2rem;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 16px;
+  color: #fff;
 }
 
-mat-card-content form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Form field */
 mat-form-field {
   width: 100%;
+  margin-bottom: 16px;
+
+  .mat-form-field-flex {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+
+  .mat-input-element {
+    color: #fff;
+  }
+
+  .mat-label {
+    color: #eee;
+  }
+
+  mat-icon {
+    color: #fff;
+  }
 }
 
-/* Input */
-input.mat-input-element {
-  color: #000;
-  font-weight: 500;
+button[mat-raised-button] {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 600;
 }
 
-/* Placeholder */
-::ng-deep input::placeholder {
-  opacity: 0.6;
-  color: #888;
-}
-
-/* Floating label */
-::ng-deep .mat-form-field-label {
-  color: #666;
-  font-weight: 500;
-}
-
-/* Icon button */
-button[mat-icon-button] {
-  color: #555;
-}
-
-/* Submit button */
-button[type="submit"] {
-  margin-top: 1rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-  background-color: #3f51b5;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  border-radius: 10px;
-  text-transform: uppercase;
-  transition: 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #303f9f;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Error style */
-mat-error {
-  font-size: 0.8rem;
-  color: #ff5252;
-}
-
-/* Card action button (sign up link) */
 mat-card-actions {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
-}
+  margin-top: 12px;
 
-mat-card-actions button {
-  font-weight: 500;
-  color: #3f51b5;
+  button {
+    color: #ff9800; /* accent color */
+    font-weight: 500;
+  }
 }

@@ -1,0 +1,29 @@
+.slider-container {
+  width: 100%;
+  aspect-ratio: 1915 / 460; 
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slider-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 100%; 
+  max-width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block; 
+    display: block;
+    border-radius: 16px;
+  }
+}

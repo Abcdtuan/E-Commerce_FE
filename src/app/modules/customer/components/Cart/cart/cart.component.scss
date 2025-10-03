@@ -40,19 +40,7 @@
   color: #d12d2d;
 }
 
-.quantity-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
 
-.quantity-controls button {
-  padding: 2px 8px;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  background: #f2f2f2;
-  cursor: pointer;
-}
 
 .cart-right {
   flex: 1;
@@ -93,3 +81,59 @@
   cursor: pointer;
   margin-top: 16px;
 }
+.coupon {
+  margin-top: 20px;
+}
+
+.coupon-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.coupon-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #d12d2d !important;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.coupon-btn:hover {
+  background-color: #b71c1c !important;
+}
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  color: #0033cc; /* Màu nút */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.quantity-controls button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.quantity-controls mat-icon {
+  font-size: 24px;
+}
+
+.quantity-controls .quantity {
+  min-width: 32px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+

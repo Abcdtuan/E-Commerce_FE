@@ -4,8 +4,9 @@ import { SignupComponent } from './auth/components/signup/signup.component';
 import { LoginComponent } from './auth/components/login/login.component';
 
 export const routes: Routes = [
-    {path:'sign-up',component:SignupComponent},
-    {path:'login',component:LoginComponent},
+    // {path:'sign-up',component:SignupComponent},
+    // {path:'login',component:LoginComponent},
     {path:'customer',loadChildren: () => import('./modules/customer/customer.module').then(m => m.CustomerModule)},
     {path:'admin',loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)},
+    {path:'',loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
 ];

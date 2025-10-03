@@ -42,8 +42,19 @@ export class AdminService {
       headers: this.createAuthorizationHeader(),
     });
   }
+  getProductById(id: number): Observable<any> {
+    return this.http.get(BASIC_URL + `/api/admin/product/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(BASIC_URL + `/api/admin/product/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  updateProduct(id: number, productDto: any): Observable<any> {
+    return this.http.put(BASIC_URL + `/api/admin/product/update/${id}`, productDto, {
       headers: this.createAuthorizationHeader(),
     });
   }

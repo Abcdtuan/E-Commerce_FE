@@ -1,0 +1,62 @@
+.footer {
+  background-color: #0e0f0f; // màu xanh dương Bootstrap
+  color: white;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .footer-left {
+    h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0.25rem 0 0 0;
+      font-size: 0.9rem;
+    }
+
+    // Thêm phần này:
+    .contact-info {
+      margin-top: 0.5rem;
+
+      p {
+        margin: 0.2rem 0;
+        font-size: 0.85rem;
+
+        a {
+          color: #ffffff;
+          text-decoration: underline;
+
+          &:hover {
+            color: #d1ecff;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 1rem;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

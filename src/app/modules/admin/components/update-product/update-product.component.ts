@@ -24,13 +24,13 @@ export class UpdateProductComponent {
   
     listOfCategories: any = [];
   
-    selectedFile: File | null = null;
+      selectedFiles: File[] = [];
   
-    imagePreview: string | ArrayBuffer | null = null;
+    imagePreview: (string | ArrayBuffer)[] = [];
 
     productId!: number;
 
-    existingImg: string  | null = null;
+    existingImg: string []  | null = null;
 
     
   
@@ -42,22 +42,6 @@ export class UpdateProductComponent {
          this.productId = Number(this.activatedRoute.snapshot.params['productId']);
       }
     
-  
-    onFileSelected(event: any){
-      this.selectedFile = event.target.files[0];
-      this.previewImage();
-      this.existingImg = null;
-    }
-    
-    previewImage(){
-      if (this.selectedFile) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.imagePreview = reader.result;
-        };
-        reader.readAsDataURL(this.selectedFile);
-      }
-    }
   
     ngOnInit(): void {
       this.productForm = this.fb.group({
@@ -80,16 +64,32 @@ export class UpdateProductComponent {
       this.adminService.getProductById(this.productId).subscribe({
        next: (res) =>{
           this.productForm.patchValue(res)
-          this.existingImg = 'data:image/jpeg;base64,' + res.byteImg;
+          this.existingImg = res.byteImages.map((imgByte: string) => 
+             'data:image/jpeg;base64,' + imgByte
+          )
+          console.log(res)
        }
        
       })
     }
+    onFileSelected(event: any) {
+      this.selectedFiles = Array.from(event.target.files);
+      this.imagePreview = [];
+
+      this.selectedFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview.push(reader.result as string | ArrayBuffer);
+        };
+        reader.readAsDataURL(file);
+      });
+      this.existingImg = null;
+    }
     updateProduct(): void{
       if(this.productForm.valid){
         const formData = new FormData();
-        if (this.selectedFile) {
-          formData.append('img', this.selectedFile);
+        if (this.selectedFiles.length) {
+        this.selectedFiles.forEach(file => formData.append('img', file));
         }
         formData.append('name', this.productForm.get('name')?.value);
         formData.append('description', this.productForm.get('description')?.value);

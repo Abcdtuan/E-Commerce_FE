@@ -12,12 +12,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-post-product',
   standalone: true,
-  imports: [ReactiveFormsModule, MatIcon, CommonModule, MatFormFieldModule, MatLabel,MatInputModule, MatError, MatOption, MatSelectModule],
+  imports: [ReactiveFormsModule, MatIcon, CommonModule, MatFormFieldModule, MatLabel,MatInputModule, MatError, MatOption, MatSelectModule, MatButtonModule],
   templateUrl: './post-product.component.html',
   styleUrl: './post-product.component.scss'
 })
@@ -25,11 +26,18 @@ export class PostProductComponent {
 
   productForm!: FormGroup
 
+  categoryForm!: FormGroup;
+
   listOfCategories: any = [];
 
-  selectedFile: File | null = null;
+  selectedFiles: File[] = [];
 
-  imagePreview: string | ArrayBuffer | null = null;
+  imagePreviews: (string | ArrayBuffer | null)[] = [];
+
+  showCategoryForm: boolean = false;
+
+
+  
 
   constructor(private fb: FormBuilder,
     private adminService: AdminService,
@@ -38,18 +46,26 @@ export class PostProductComponent {
   
 
   onFileSelected(event: any){
-    this.selectedFile = event.target.files[0];
-    this.previewImage();
-  }
-  
-  previewImage(){
-    if (this.selectedFile) {
+    const files: File[] = Array.from(event.target.files);
+     this.selectedFiles.push(...files);
+     files.forEach(file => {
       const reader = new FileReader();
       reader.onload = () => {
-        this.imagePreview = reader.result;
+        this.imagePreviews.push(reader.result);
       };
-      reader.readAsDataURL(this.selectedFile);
-    }
+      reader.readAsDataURL(file);
+    });
+  }
+  
+  previewImages() {
+    this.imagePreviews = [];
+    this.selectedFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreviews.push(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }); 
   }
 
   ngOnInit(): void {
@@ -59,7 +75,12 @@ export class PostProductComponent {
       description: [null, [Validators.required]],
       price: [null, [Validators.required, Validators.min(0)]]
     })
+    this.categoryForm = this.fb.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]]
+    })
     this.getAllCategorys();
+    
   }
   getAllCategorys(){
     this.adminService.getAllCategorys().subscribe({
@@ -72,9 +93,9 @@ export class PostProductComponent {
   addProduct(): void{
     if(this.productForm.valid){
       const formData = new FormData();
-      if (this.selectedFile) {
-        formData.append('img', this.selectedFile);
-      }
+      this.selectedFiles.forEach(file => {
+      formData.append('images', file); 
+      });
       formData.append('name', this.productForm.get('name')?.value);
       formData.append('description', this.productForm.get('description')?.value);
       formData.append('price', this.productForm.get('price')?.value);
@@ -95,6 +116,22 @@ export class PostProductComponent {
         this.productForm.controls[i].markAsDirty();
         this.productForm.controls[i].updateValueAndValidity();
       }
+    }
+  }
+  createCategory(){
+    if(this.categoryForm.valid){
+      this.adminService.createCategory(this.categoryForm.value).subscribe({
+        next: (res) => {
+          if(res != null){
+            this.snackbar.open("Category Created Successfully", "Close", {
+              duration: 3000,
+            });
+            this.getAllCategorys();
+            this.showCategoryForm = false;
+            this.categoryForm.reset();
+          }
+        }
+      })
     }
   }
 }

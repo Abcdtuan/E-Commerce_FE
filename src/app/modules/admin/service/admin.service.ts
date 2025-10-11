@@ -71,7 +71,32 @@ export class AdminService {
     });
   }
 
+  deleteCoupon(id: number): Observable<any>{
+    return this.http.delete(BASIC_URL + `/api/admin/coupon/delete/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  updateCoupon(id: number, couponDto: any): Observable<any>{
+    return this.http.put(BASIC_URL + `/api/admin/coupon/update/${id}`, couponDto, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  createCategory(categoryDto: any): Observable<any> {
+    return this.http.post(BASIC_URL + "/api/admin/category", categoryDto, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
 
+  updateCategory(id: number, categoryDto: any): Observable<any> {
+    return this.http.put(BASIC_URL + `/api/admin/category/update/${id}`, categoryDto, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(BASIC_URL + `/api/admin/category/delete/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
 
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(

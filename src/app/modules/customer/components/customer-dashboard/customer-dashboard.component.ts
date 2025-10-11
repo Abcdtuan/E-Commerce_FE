@@ -40,26 +40,40 @@ export class CustomerDashboardComponent {
     })
   }
   getAllProducts() {
-    this.products = []
-    this.customerService.getAllProducts().subscribe((res: any[]) => {
-      res.forEach((element: any) =>{
-        element.processedImg = 'data:image/jpeg;base64,' + element.byteImg;
-        this.products.push(element);
-      })
-      console.log(this.products);
-    })
+  this.products = [];
+  this.customerService.getAllProducts().subscribe((res: any[]) => {
+    res.forEach((productDto: any) => {
+      const images = productDto.byteImages.map((imgByte: string) => ({
+        processedImg: 'data:image/jpeg;base64,' + imgByte
+      }));
+      const product = {
+        ...productDto,
+        images: images,
+        thumbnail: images.length > 0 ? images[0].processedImg : ''
+      };
+
+      this.products.push(product);
+    });
+  });
   }
-  submitSearch(){
+  submitSearch() {
     this.products = [];
     const title = this.searchProducts.get('title')!.value;
     this.customerService.getAllProductsByName(title).subscribe((res: any[]) => {
-      res.forEach((element: any) =>{
-        element.processedImg = 'data:image/jpeg;base64,' + element.byteImg;
-        this.products.push(element);
-      })
-    })
-
+      res.forEach((productDto: any) => {     
+        const images = productDto.byteImages.map((imgByte: string) => ({
+          processedImg: 'data:image/jpeg;base64,' + imgByte
+        }));
+        const product = {
+          ...productDto,
+          images: images,
+          thumbnail: images.length > 0 ? images[0].processedImg : ''
+        };
+        this.products.push(product);
+        });
+      });
   }
+
   addProductToCart(id: any) {
     this.customerService.addProductToCart(id).subscribe({
       next: (res) => {

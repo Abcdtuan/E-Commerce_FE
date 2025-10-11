@@ -1,8 +1,18 @@
 <div class="product-detail-container" *ngIf="product">
 
-  <div class="product-image-section">
-    <img [src]="existingImg" alt="img" class="product-image">
+  <div class="product-image-section" *ngIf="product && product.images?.length > 0">
+    <button class="slider-btn left" (click)="prevImage()">&#10094;</button>
+
+    <img [src]="product.images[currentImageIndex].processedImg" alt="img" class="product-image">
+
+    <button class="slider-btn right" (click)="nextImage()">&#10095;</button>
+    <div class="dots">
+      <span *ngFor="let img of product.images; let i = index"
+            [class.active]="i === currentImageIndex"
+            (click)="currentImageIndex = i"></span>
+    </div>
   </div>
+
 
   <div class="product-info-section">
     <h1 class="product-title">{{ product.name }}</h1>
@@ -29,7 +39,11 @@
     <div class="category">
       <span>Danh mục:</span> {{ product.categoryName}}
     </div>
-
   </div>
 </div>
+<div class="product-description-section" *ngIf="product">
+  <h2>Mô tả sản phẩm</h2>
+  <p>{{ product.description }}</p>
+</div>
+
 

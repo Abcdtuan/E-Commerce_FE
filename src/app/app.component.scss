@@ -9,6 +9,11 @@
   position: relative;
   overflow: hidden;
 }
+.logo {
+  height: 70px;        
+  width: auto;         
+  object-fit: contain; 
+}
 
 .navbar::before {
   content: '';

@@ -1,1 +1,52 @@
-<p>post-category works!</p>
+<div class="category-container">
+  <div class="header">
+    <h2>Danh sách danh mục</h2>
+    <button class="btn add" (click)="openAddModal()">Thêm mới</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Mô tả</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of categories">
+          <td>{{ category.id }}</td>
+          <td>{{ category.name }}</td>
+          <td>{{ category.description }}</td>
+          <td class="actions-cell">
+            <div class="actions">
+                <button class="btn update" (click)="openUpdateModal(category)">Cập nhật</button>
+                <button class="btn delete" (click)="deleteCategory(category.id)">Xóa</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 🔹 Form modal (cập nhật hoặc thêm mới) -->
+<div class="modal" *ngIf="showUpdateModal || showAddModal">
+  <div class="modal-content">
+    <h3>{{ showAddModal ? 'Thêm mới danh mục' : 'Cập nhật danh mục' }}</h3>
+
+    <form [formGroup]="categoryForm" (ngSubmit)="showAddModal ? addCategory() : updateCategory()">
+      <label>Tên:</label>
+      <input type="text" formControlName="name">
+
+      <label>Mô tả:</label>
+      <textarea formControlName="description"></textarea>
+
+      <div class="modal-actions">
+        <button type="submit" [disabled]="categoryForm.invalid">{{ showAddModal ? 'Thêm' : 'Lưu' }}</button>
+        <button type="button" (click)="closeModal()">Hủy</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { map } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { Component } from '@angular/core';
 import { CustomerService } from '../../service/customer.service';
@@ -20,6 +21,7 @@ export class ProductDetailComponent {
 
   productId!: number;
   product: any;
+  currentImageIndex: number = 0;
 
   existingImg: string  | null = null;
 
@@ -38,10 +40,25 @@ export class ProductDetailComponent {
 
   productDetails(){
     this.customerService.getProductById(this.productId).subscribe(res=>{
-      console.log(res);
-      this.existingImg = 'data:image/jpeg;base64,' + res.byteImg;
-      this.product = res;
+      const images = res.byteImages.map((imgByte: string) => ({
+        processedImg: 'data:image/jpeg;base64,' + imgByte
+      }))
+      this.product = {
+        ...res,
+        images: images,
+      }
+      this.currentImageIndex = 0;
+        
     })
+  }
+  nextImage() {
+    if (!this.product || !this.product.images) return;
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.product.images.length;
+  }
+
+  prevImage() {
+    if (!this.product || !this.product.images) return;
+    this.currentImageIndex = (this.currentImageIndex - 1 + this.product.images.length) % this.product.images.length;
   }
   addProductToCart(id: any) {
     this.customerService.addProductToCart(id).subscribe({

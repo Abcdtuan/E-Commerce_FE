@@ -40,28 +40,47 @@ export class AdminDashboardComponent {
   }
 
   getAllProducts() {
-    this.products = [];
-    this.adminService.getAllProducts().subscribe((res: any[]) =>{
-      res.forEach((element: any) =>{
-        element.processedImg = 'data:image/jpeg;base64,' + element.byteImg;
-        this.products.push(element);
-      });
-      
-    })
+  this.products = [];
+  this.adminService.getAllProducts().subscribe((res: any[]) => {
+    res.forEach((productDto: any) => {
+      const images = productDto.byteImages.map((imgByte: string) => ({
+        processedImg: 'data:image/jpeg;base64,' + imgByte
+      }));
+      const product = {
+        ...productDto,
+        images: images,
+        thumbnail: images.length > 0 ? images[0].processedImg : ''
+      };
+
+      this.products.push(product);
+    });
+  });
+}
+
+submitSearch() {
+  this.products = [];
+  const title = this.searchProducts.get('title')!.value;
+
+  this.adminService.getAllProductsByName(title).subscribe((res: any[]) => {
+    res.forEach((productDto: any) => {
+      // Chuyển byteImages thành processedImg để hiển thị
+      const images = productDto.byteImages.map((imgByte: string) => ({
+        processedImg: 'data:image/jpeg;base64,' + imgByte
+      }));
+
+      const product = {
+        ...productDto,
+        images: images,
+        thumbnail: images.length > 0 ? images[0].processedImg : ''
+      };
+
+      this.products.push(product);
+    });
+
+    console.log(this.products);
+  });
   }
 
-  submitSearch() {
-    this.products = [];
-    const title = this.searchProducts.get('title')!.value;
-    this.adminService.getAllProductsByName(title).subscribe((res: any[]) =>{
-      res.forEach((element: any) =>{
-        element.processedImg = 'data:image/jpeg;base64,' + element.byteImg;
-        this.products.push(element);
-      });
-      console.log(this.products)
-      
-    })
-  }
   deleteProduct(id: number){
     this.adminService.deleteProduct(id).subscribe({
       next: (res) =>{

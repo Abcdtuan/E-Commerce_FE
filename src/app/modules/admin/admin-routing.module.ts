@@ -10,7 +10,7 @@ import { UpdateProductComponent } from './components/update-product/update-produ
 const routes: Routes = [
   {path:'dashboard',component: AdminDashboardComponent},
   {path:'product', component: PostProductComponent},
-  {path:'categoty',component: PostCategoryComponent},
+  {path:'category',component: PostCategoryComponent},
   {path:'post-coupon', component: PostCouponComponent},
   {path: 'coupons', component: CouponsComponent},
   {path:'update-product/:productId', component: UpdateProductComponent}

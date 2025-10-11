@@ -1,37 +1,81 @@
-<div class="container" style="padding: 30px;">
-  <mat-card>
-    <mat-card-content>
-      <table mat-table [dataSource]="coupons" class="mat-elevation-z8">
+<div class="coupon-container">
+  <div class="header">
+    <h2>Danh sách Coupon</h2>
+  </div>
 
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>Coupon ID</th>
-          <td mat-cell *matCellDef="let coupon">{{ coupon.id }}</td>
-        </ng-container>
+  <!-- Table hiển thị danh sách coupons -->
+  <div class="table-wrapper">
+    <table class="coupon-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Discount</th>
+          <th>Expiry Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let coupon of coupons">
+          <td>{{coupon.id}}</td>
+          <td>{{coupon.name}}</td>
+          <td>{{coupon.code}}</td>
+          <td>{{coupon.discount}}</td>
+          <td>{{ coupon.expirationDate | date: 'dd/MM/yyyy' }}</td>
+          <td class="actions-cell">
+            <div class="actions">
+              <button class="btn update" (click)="openUpdate(coupon)">Sửa</button>
+              <button class="btn delete" (click)="deleteCoupon(coupon.id)">Xóa</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let coupon">{{ coupon.name }}</td>
-        </ng-container>
+  <!-- Modal cập nhật coupon -->
+  <div class="modal" *ngIf="showUpdate">
+    <div class="modal-content">
+      <h3>Cập nhật Coupon</h3>
+      <form [formGroup]="couponForm" (ngSubmit)="updateCoupon()">
+        <div class="form-group">
+          <label for="name">Tên coupon</label>
+          <input id="name" type="text" formControlName="name">
+          <div *ngIf="couponForm.get('name')?.invalid && couponForm.get('name')?.touched" class="error">
+            Tên là bắt buộc
+          </div>
+        </div>
 
-        <ng-container matColumnDef="discount">
-          <th mat-header-cell *matHeaderCellDef>Discount</th>
-          <td mat-cell *matCellDef="let coupon" class="bold-cell">{{ coupon.discount }}%</td>
-        </ng-container>
+        <div class="form-group">
+          <label for="code">Code</label>
+          <input id="code" type="text" formControlName="code">
+          <div *ngIf="couponForm.get('code')?.invalid && couponForm.get('code')?.touched" class="error">
+            Code là bắt buộc
+          </div>
+        </div>
 
-        <ng-container matColumnDef="code">
-          <th mat-header-cell *matHeaderCellDef>Code</th>
-          <td mat-cell *matCellDef="let coupon" class="bold-cell">{{ coupon.code }}</td>
-        </ng-container>
+        <div class="form-group">
+          <label for="discount">Discount</label>
+          <input id="discount" type="number" formControlName="discount">
+          <div *ngIf="couponForm.get('discount')?.invalid && couponForm.get('discount')?.touched" class="error">
+            Discount là bắt buộc
+          </div>
+        </div>
 
-        <ng-container matColumnDef="expirationDate">
-          <th mat-header-cell *matHeaderCellDef>Expiration Date</th>
-          <td mat-cell *matCellDef="let coupon">{{ coupon.expirationDate | date: 'dd/MM/yyyy' }}</td>
-        </ng-container>
+        <div class="form-group">
+          <label for="expirationDate">Expiry Date</label>
+          <input id="expirationDate" type="date" formControlName="expirationDate">
+          <div *ngIf="couponForm.get('expirationDate')?.invalid && couponForm.get('expirationDate')?.touched" class="error">
+            Ngày hết hạn là bắt buộc
+          </div>
+        </div>
 
-        <tr mat-header-row *matHeaderRowDef="['id', 'name', 'discount', 'code', 'expirationDate']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['id', 'name', 'discount', 'code', 'expirationDate']"></tr>
-
-      </table>
-    </mat-card-content>
-  </mat-card>
+        <div class="form-actions">
+          <button type="submit" [disabled]="couponForm.invalid">Cập nhật</button>
+          <button type="button" (click)="close()">Hủy</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

@@ -8,15 +8,15 @@
                 <mat-icon>attach_file</mat-icon>
             </label>
 
-            <div *ngIf="selectedFile" class="image-preview">
-                <div class="circle-image">
-                    <img [src]="imagePreview" alt="Selected Image" class="image-preview" />
+            <div *ngIf="selectedFiles.length > 0" class="image-preview-container">
+                <div class="circle-image" *ngFor="let img of imagePreview">
+                    <img [src]="img" alt="Selected Image" class="image-preview" />
                 </div>
             </div>
 
-            <div *ngIf="existingImg" class="image-preview">
-                <div class="circle-image">
-                    <img [src]="existingImg" alt="Existing Image" class="preview-image">
+            <div *ngIf="existingImg?.length && selectedFiles.length === 0" class="image-preview-container">
+                <div class="circle-image" *ngFor="let img of existingImg">
+                    <img [src]="img" alt="Existing Image" class="image-preview" />
                 </div>
             </div>
 

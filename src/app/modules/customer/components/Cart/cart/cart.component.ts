@@ -1,23 +1,23 @@
 import { FormBuilder, Validators } from '@angular/forms';
-
 import { Component } from '@angular/core';
 import { CustomerService } from '../../../service/customer.service';
 import { CommonModule } from '@angular/common';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormField } from "@angular/material/form-field";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatLabel } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
+import { PlaceOrderComponent } from '../../place-order/place-order.component';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, MatIconModule, ReactiveFormsModule, MatFormField, MatFormFieldModule, MatInputModule, MatLabel , MatButtonModule, MatListModule],
+  imports: [CommonModule, MatIconModule, ReactiveFormsModule,  
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,PlaceOrderComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -29,10 +29,12 @@ export class CartComponent {
   order: any;
   couponForm!: any;
   errorMessage: string = '';
+  
 
   constructor(private customerService: CustomerService,
               private fb: FormBuilder,
-              private snack: MatSnackBar
+              private snack: MatSnackBar,
+              private dialog: MatDialog
   ){}
 
   ngOnInit(): void{
@@ -105,4 +107,13 @@ export class CartComponent {
       })
     
   }
+  placeOrder(){
+    this.dialog.open(PlaceOrderComponent, {
+      width: '600px',  // tăng chiều rộng
+      maxWidth: '90vw', // responsive, tối đa 90% màn hình
+    });
+
+    
+  }
+  
 }

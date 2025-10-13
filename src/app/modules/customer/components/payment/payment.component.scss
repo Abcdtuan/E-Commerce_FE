@@ -1,0 +1,139 @@
+.payment-result {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.payment-result h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.payment-result table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.payment-result table tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.payment-result table tr:last-child {
+  border-bottom: none;
+}
+
+.payment-result table td {
+  padding: 15px 10px;
+  vertical-align: top;
+}
+
+.payment-result table td:first-child {
+  width: 45%;
+  color: #666;
+}
+
+.payment-result table td:last-child {
+  color: #333;
+  font-weight: 500;
+}
+
+.payment-result table strong {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Button styles */
+.payment-result button {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0;
+  padding: 12px 24px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-result button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.payment-result button:active {
+  transform: translateY(0);
+}
+
+.payment-result button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .payment-result {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .payment-result h2 {
+    font-size: 20px;
+  }
+
+  .payment-result table td {
+    padding: 12px 8px;
+    font-size: 14px;
+  }
+
+  .payment-result table td:first-child {
+    width: 40%;
+  }
+
+  .payment-result button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+
+/* Thêm style cho trạng thái thành công/thất bại */
+.payment-result.success h2 {
+  color: #28a745;
+}
+
+.payment-result.success button {
+  background: #28a745;
+}
+
+.payment-result.success button:hover {
+  background: #218838;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.payment-result.error h2 {
+  color: #dc3545;
+}
+
+.payment-result.error button {
+  background: #6c757d;
+}
+
+.payment-result.error button:hover {
+  background: #5a6268;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}

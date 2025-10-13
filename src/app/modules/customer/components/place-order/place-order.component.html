@@ -1,0 +1,48 @@
+<div class="form-wrapper">
+    <form [formGroup]="placeOrderForm" (ngSubmit)="placeOrder()" class="place-order-form">
+    <h3>Địa chỉ nhận hàng</h3>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Tên người nhận</mat-label>
+        <input matInput placeholder="Nhập tên" formControlName="name" />
+        <mat-error *ngIf="placeOrderForm.get('name')?.hasError('required')">
+        Vui lòng nhập tên người nhận
+        </mat-error>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Địa chỉ giao hàng</mat-label>
+        <input matInput placeholder="Nhập địa chỉ" formControlName="address" />
+        <mat-error *ngIf="placeOrderForm.get('address')?.hasError('required')">
+        Vui lòng nhập địa chỉ giao hàng
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Số điện thoại</mat-label>
+        <input matInput placeholder="Nhập số điện thoại" formControlName="phone" />
+        <mat-error *ngIf="placeOrderForm.get('phone')?.hasError('required')">
+        Vui lòng nhập số điện thoại
+        </mat-error>
+        <mat-error *ngIf="placeOrderForm.get('phone')?.hasError('pattern')">
+        Số điện thoại không hợp lệ
+        </mat-error>
+    </mat-form-field>
+
+    
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Ghi chú đơn hàng</mat-label>
+        <textarea matInput placeholder="Nhập ghi chú (nếu có)" formControlName="orderDescription" rows="3"></textarea>
+    </mat-form-field>
+
+    <div class="button-group">
+        <button mat-flat-button color="primary" type="submit" [disabled]="placeOrderForm.invalid">
+        Thanh toán
+        </button>
+        <button mat-stroked-button color="warn" type="button" (click)="closeForm()">
+        Hủy
+        </button>
+    </div>
+    </form>
+</div>
+

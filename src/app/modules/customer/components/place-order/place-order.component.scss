@@ -1,0 +1,45 @@
+/* Form container */
+
+.place-order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1000px;  /* tăng chiều rộng form */
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Kéo dài mat-form-field */
+.place-order-form mat-form-field {
+  width: 100%;          /* chiếm hết chiều ngang form */
+}
+
+/* Kéo dài input và textarea */
+.place-order-form input,
+.place-order-form textarea {
+  width: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Button nhóm */
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Font size cho mat-form-field label */
+mat-form-field {
+  font-size: 16px;
+}
+
+/* Nút */
+button {
+  min-width: 120px;
+  height: 42px;
+  font-size: 14px;
+}

@@ -69,7 +69,6 @@ export class CustomerService {
     const CartDto = {
       productId: productId,
       userId: UserStorageService.getUserId()
-
     }
     return this.http.post(BASIC_URL + '/api/customer/cart/deduction', CartDto, {
       headers: this.createAuthorizationheader()
@@ -87,6 +86,24 @@ export class CustomerService {
         headers: this.createAuthorizationheader(),
       });
   }
+
+  placeOrder(placeOrderDto: any): Observable<any> {
+     placeOrderDto.userId = UserStorageService.getUserId();
+     return this.http.post(BASIC_URL + '/api/customer/cart/placeOrder', placeOrderDto, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+  createPayment(orderId: number, amount: number, orderInfo: string): Observable<{url: string}> {
+  const body = {
+    orderId,
+    amount,
+    orderInfo
+  };
+  return this.http.post<{url: string}>(`${BASIC_URL}/api/payment/create`, body, {
+    headers: this.createAuthorizationheader()
+  });
+}
+
 
   private createAuthorizationheader(): HttpHeaders{
     return new HttpHeaders().set(

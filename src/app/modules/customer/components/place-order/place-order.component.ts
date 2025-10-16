@@ -41,6 +41,7 @@ export class PlaceOrderComponent {
     })
   }
   placeOrder(){
+    console.log("Dữ liệu gửi đi:", this.placeOrderForm.value);
     this.customerService.placeOrder(this.placeOrderForm.value).subscribe({
       next: (res) => {
         this.snack.open("Order placed successfully", "Close", {
@@ -51,7 +52,7 @@ export class PlaceOrderComponent {
             next: (res) => window.location.href = res.url,
             error: (err) => this.snack.open("Lỗi tạo thanh toán: " + err.error.message, "Close", { duration: 2000 })
           });
-
+ 
         this.closeForm();
       },
       error: (err) => {

@@ -1,0 +1,37 @@
+<div class="order-container">
+  <div class="header">
+    <h2>Danh sách Order</h2>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Giá tiền</th>
+          <th>Ghi chú</th>
+          <th>Địa chỉ</th>
+          <th>Ngày</th>
+          <th>Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{order.id}}</td>
+          <td>{{order.userName || 'N/A'}}</td>
+          <td class="bold-cell">{{formatCurrency(order.amount)}}</td>
+          <td>{{order.orderDescription || 'Không có mô tả'}}</td>
+          <td>{{order.address}}</td>
+          <td>{{ order.date | date: 'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="getStatusClass(order.orderStatus)">
+              {{getStatusLabel(order.orderStatus)}}
+            </span>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

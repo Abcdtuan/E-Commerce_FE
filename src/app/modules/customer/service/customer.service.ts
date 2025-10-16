@@ -104,6 +104,13 @@ export class CustomerService {
   });
 }
 
+  getOrdersByUserId(): Observable<any> {
+    const userId = UserStorageService.getUserId();
+    return this.http.get(BASIC_URL + `/api/customer/orders/placedOrders/${userId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+
 
   private createAuthorizationheader(): HttpHeaders{
     return new HttpHeaders().set(

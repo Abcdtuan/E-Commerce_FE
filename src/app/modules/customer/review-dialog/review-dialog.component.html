@@ -1,0 +1,90 @@
+<div class="review-dialog">
+  <div class="dialog-header">
+    <h2>Đánh Giá Sản Phẩm</h2>
+    <button mat-icon-button (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="product-info">
+    <img [src]="data.product.processedImg" [alt]="data.product.name" />
+    <div class="product-details">
+      <h3>{{ data.product.name }}</h3>
+      <p class="category">{{ data.product.categoryName }}</p>
+    </div>
+  </div>
+
+  <form [formGroup]="reviewForm">
+    <div class="rating-section">
+      <label>Chất lượng sản phẩm</label>
+      <div class="stars">
+        <mat-icon 
+          *ngFor="let star of [1,2,3,4,5]" 
+          [class.active]="star <= (reviewForm.get('rating')?.value || 0)"
+          (click)="setRating(star)">
+          {{ star <= (reviewForm.get('rating')?.value || 0) ? 'star' : 'star_border' }}
+        </mat-icon>
+        <span class="rating-text">{{ getRatingText() }}</span>
+      </div>
+    </div>
+
+    <div class="quality-section">
+      <label>Chất lượng sản phẩm:</label>
+      <div class="quality-placeholder">
+        {{ reviewForm.get('rating')?.value ? getRatingText() : '' }}
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Hãy chia sẻ những điều bạn thích về sản phẩm này với những người mua khác nhé</mat-label>
+        <textarea 
+          matInput 
+          formControlName="description"
+          rows="5"
+          placeholder="Nhập đánh giá của bạn..."></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="upload-section">
+      <label>Thêm hình ảnh (Tùy chọn)</label>
+      <div class="upload-area">
+        <div class="preview-images" *ngIf="imagePreviews.length > 0">
+          <div *ngFor="let preview of imagePreviews; let i = index" class="preview-item">
+            <img [src]="preview" alt="Preview" />
+            <button type="button" mat-icon-button class="remove-btn" (click)="removeImage(i)">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          mat-stroked-button 
+          class="upload-btn" 
+          (click)="fileInput.click()">
+          <mat-icon>add_photo_alternate</mat-icon>
+          Thêm Hình ảnh
+        </button>
+        <input 
+          #fileInput 
+          type="file" 
+          hidden 
+          multiple 
+          accept="image/*"
+          (change)="onFileSelected($event)" />
+      </div>
+    </div>
+
+  </form>
+
+  <div class="dialog-actions">
+    <button mat-button (click)="onClose()">TRỞ LẠI</button>
+    <button 
+      mat-raised-button 
+      color="warn" 
+      (click)="onSubmit()"
+      [disabled]="!reviewForm.valid">
+      Hoàn Thành
+    </button>
+  </div>
+</div>

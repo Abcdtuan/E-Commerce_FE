@@ -36,7 +36,7 @@ export class CouponsComponent {
        name: [null, [Validators.required]],
        code: [null, [Validators.required]],
        discount: [null, [Validators.required]],
-      expirationDate: [null, [Validators.required]]
+       expirationDate: [null, [Validators.required]]
     })
     this.getAllCoupons();
   }
@@ -44,9 +44,6 @@ export class CouponsComponent {
   getAllCoupons(){
     this.adminService.getAllCoupons().subscribe(res =>{
       this.coupons = res;
-      this.snack.open("Coupons fetched successfully", "Close", {
-        duration: 2000,
-      })
     })
   }
 

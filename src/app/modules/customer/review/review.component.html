@@ -1,0 +1,50 @@
+
+<div class="order-products-container" *ngIf="orderProductDetailsList?.length; else emptyBlock">
+  <mat-card class="order-card">
+    <mat-card-title>Chi tiết sản phẩm trong đơn hàng</mat-card-title>
+
+    <mat-divider></mat-divider>
+
+    <mat-list>
+      <mat-list-item *ngFor="let p of orderProductDetailsList" class="product-item">
+        <img matListAvatar [src]="p.processedImg" alt="{{ p.name }}" class="thumb" />
+
+        <div matLine class="product-main">
+          <div class="product-name">{{ p.name }}</div>
+          <div class="product-meta">
+            Giá: <span class="price">{{ p.price | number:'1.0-0' }} ₫</span>
+            &nbsp;·&nbsp;
+            Số lượng: <strong>{{ p.quantity }}</strong>
+          </div>
+        </div>
+
+        <!-- Hành động (ví dụ: đánh giá) -->
+        <div class="product-actions" matLine>
+        <button *ngIf="!p.reviewed" mat-stroked-button color="primary" (click)="onReviewProduct(p)">
+          Đánh giá
+      </button>
+
+      <button *ngIf="p.reviewed" mat-flat-button color="accent" (click)="buyAgain(p.id)">
+        Mua lại
+      </button>
+        </div>
+      </mat-list-item>
+
+      <mat-divider *ngIf="false"></mat-divider> 
+    </mat-list>
+
+    <mat-card-actions class="order-total">
+      <div class="total-label">Tổng cộng:</div>
+      <div class="total-value">{{ totalAmount | number:'1.0-0' }} ₫</div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #emptyBlock>
+  <mat-card class="order-card empty">
+    <mat-card-content>
+      <p>Không có sản phẩm trong đơn hàng này.</p>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
+

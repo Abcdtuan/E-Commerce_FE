@@ -21,6 +21,8 @@ export class ProductDetailComponent {
 
   productId!: number;
   product: any;
+
+  reviewList: any[] = []
   currentImageIndex: number = 0;
 
   existingImg: string  | null = null;
@@ -36,6 +38,7 @@ export class ProductDetailComponent {
 
   ngOnInit(): void {
     this.productDetails();
+    this.getAllReviewsByProductId();
   }
 
   productDetails(){
@@ -74,6 +77,25 @@ export class ProductDetailComponent {
       
     }
     })
+  }
+
+    getAllReviewsByProductId() {
+    this.customerService.getReviewByProductId(this.productId).subscribe((res: any[]) => {
+      console.log('Review response:', res); 
+      this.reviewList = res.map(review => {
+        const reviewImages = review.byteImages?.map((imgByte: string) => ({
+          processedReviewImg: 'data:image/jpeg;base64,' + imgByte
+        })) || [];
+
+        return {
+          ...review,
+          images: reviewImages
+        };
+      });
+    });
+  }
+  getStarArray(rating: number): boolean[] {
+    return Array(5).fill(false).map((_, index) => index < rating);
   }
 
 }

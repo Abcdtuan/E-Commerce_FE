@@ -110,6 +110,22 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     });
   }
+  getOrderProductsById(orderId: number): Observable<any> {
+    return this.http.get(BASIC_URL + `/api/customer/review/${orderId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+
+  giveReview(reviewDto: any): Observable<any> {
+    return this.http.post(BASIC_URL + '/api/customer/review/product', reviewDto, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+  getReviewByProductId(productId: number): Observable<any> {
+    return this.http.get(BASIC_URL + `/api/customer/review/product/${productId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
 
 
   private createAuthorizationheader(): HttpHeaders{

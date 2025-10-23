@@ -1,11 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CustomerService } from '../../service/customer.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReviewComponent } from '../../review/review.component';
+import { AdminRoutingModule } from "../../../admin/admin-routing.module";
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, ],
+  imports: [CommonModule, AdminRoutingModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
@@ -13,7 +16,9 @@ export class OrdersComponent {
 
   orders: any[] = [];
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.getAllOrders();
@@ -51,5 +56,6 @@ export class OrdersComponent {
       this.orders = res;
     })
   }
+  
 
 }

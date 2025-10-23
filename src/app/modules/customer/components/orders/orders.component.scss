@@ -43,6 +43,7 @@
         tr {
           border-bottom: 1px solid #dee2e6;
           transition: background-color 0.2s;
+          position: relative;
 
           &:hover {
             background-color: #f8f9fa;
@@ -56,6 +57,19 @@
               font-weight: 600;
               color: #1976d2;
             }
+
+            // Đảm bảo có khoảng trống cho button ở cuối hàng
+            &:last-child {
+              padding-right: 140px;
+              position: relative;
+            }
+          }
+
+          // Wrapper cho status
+          .status-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
           }
 
           .status-badge {
@@ -89,6 +103,48 @@
               background-color: #f8d7da;
               color: #842029;
               border: 1px solid #f1aeb5;
+            }
+          }
+
+          // Button đánh giá - lùi vào 15px
+          .btn-review {
+            position: absolute;
+            right: 27px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(255, 152, 0, 0.2);
+            white-space: nowrap;
+
+            .icon {
+              font-size: 15px;
+              line-height: 1;
+            }
+
+            &:hover {
+              background: #fb8c00;
+              transform: translateY(-50%) scale(1.05);
+              box-shadow: 0 4px 8px rgba(255, 152, 0, 0.3);
+            }
+
+            &:active {
+              transform: translateY(-50%) scale(0.98);
+            }
+
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.2);
             }
           }
         }
@@ -141,6 +197,10 @@
 
       th, td {
         padding: 12px 8px;
+
+        &:last-child {
+          padding-right: 120px;
+        }
       }
 
       .bold-cell {
@@ -150,6 +210,16 @@
       .status-badge {
         padding: 4px 10px;
         font-size: 11px;
+      }
+
+      .btn-review {
+        padding: 6px 12px;
+        font-size: 12px;
+        right: 23px;
+
+        .icon {
+          font-size: 14px;
+        }
       }
 
       .status-change-btn {
@@ -174,11 +244,26 @@
 
       th, td {
         padding: 10px 6px;
+
+        &:last-child {
+          padding-right: 100px;
+        }
       }
 
       .status-badge {
         padding: 3px 8px;
         font-size: 10px;
+      }
+
+      .btn-review {
+        padding: 5px 10px;
+        font-size: 11px;
+        gap: 4px;
+        right: 21px;
+
+        .icon {
+          font-size: 13px;
+        }
       }
 
       .status-change-btn {

@@ -3,17 +3,16 @@
     <h2>Danh sách Coupon</h2>
   </div>
 
-  <!-- Table hiển thị danh sách coupons -->
   <div class="table-wrapper">
     <table class="coupon-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Name</th>
+          <th>Tên</th>
           <th>Code</th>
-          <th>Discount</th>
-          <th>Expiry Date</th>
-          <th>Actions</th>
+          <th>Giảm giá %</th>
+          <th>Ngày hết hạn</th>
+          <th>Thao tác</th>
         </tr>
       </thead>
       <tbody>
@@ -34,13 +33,13 @@
     </table>
   </div>
 
-  <!-- Modal cập nhật coupon -->
+  
   <div class="modal" *ngIf="showUpdate">
     <div class="modal-content">
-      <h3>Cập nhật Coupon</h3>
+      <h3>Cập nhật mã giảm giá</h3>
       <form [formGroup]="couponForm" (ngSubmit)="updateCoupon()">
         <div class="form-group">
-          <label for="name">Tên coupon</label>
+          <label for="name">Tên mã</label>
           <input id="name" type="text" formControlName="name">
           <div *ngIf="couponForm.get('name')?.invalid && couponForm.get('name')?.touched" class="error">
             Tên là bắt buộc
@@ -56,7 +55,7 @@
         </div>
 
         <div class="form-group">
-          <label for="discount">Discount</label>
+          <label for="discount">giảm giá</label>
           <input id="discount" type="number" formControlName="discount">
           <div *ngIf="couponForm.get('discount')?.invalid && couponForm.get('discount')?.touched" class="error">
             Discount là bắt buộc
@@ -64,7 +63,7 @@
         </div>
 
         <div class="form-group">
-          <label for="expirationDate">Expiry Date</label>
+          <label for="expirationDate">Ngày hết hạn</label>
           <input id="expirationDate" type="date" formControlName="expirationDate">
           <div *ngIf="couponForm.get('expirationDate')?.invalid && couponForm.get('expirationDate')?.touched" class="error">
             Ngày hết hạn là bắt buộc

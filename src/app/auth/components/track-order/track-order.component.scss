@@ -1,0 +1,208 @@
+/* Reset và Base */
+* {
+  box-sizing: border-box;
+}
+
+/* Search Form Container */
+.search-form {
+  max-width: 1600px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Search Field */
+.search-field {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+  display: block;
+}
+
+.search-field ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.search-field ::ng-deep .mat-form-field-outline {
+  color: #e0e0e0;
+}
+
+.search-field ::ng-deep .mat-form-field-outline-thick {
+  color: #c19a6b;
+}
+
+.search-field ::ng-deep .mat-form-field-label {
+  color: #666;
+  font-size: 16px;
+}
+
+.search-field ::ng-deep input {
+  font-size: 15px;
+  color: #1a1a1a;
+  padding: 16px 0;
+}
+
+.search-field button[type="submit"] {
+  background: #c19a6b;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.search-field button[type="submit"]:hover {
+  background: #a88858;
+  transform: scale(1.05);
+}
+
+/* Order Detail Container */
+.order-detail-container {
+  max-width: 1600px;
+  width: 100%;
+  margin: 30px auto;
+}
+
+.order-detail-container mat-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 30px 40px;
+}
+
+/* Card Header */
+.order-detail-container mat-card-header {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #c19a6b;
+}
+
+.order-detail-container mat-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Order Details */
+.order-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-detail:last-child {
+  border-bottom: none;
+}
+
+.order-detail strong {
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: right;
+}
+
+/* Status Highlight */
+.order-detail:has(strong:contains("Đã giao")),
+.order-detail:nth-child(5) strong {
+  color: #4caf50;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Large Tablets and Small Desktops */
+@media (max-width: 1024px) {
+  .search-form {
+    margin: 30px auto;
+    padding: 0 20px;
+  }
+
+  .order-detail-container mat-card {
+    padding: 25px 30px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .search-form {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .search-field {
+    max-width: 100%;
+  }
+
+  .order-detail-container mat-card {
+    padding: 20px 25px;
+  }
+
+  .order-detail-container mat-card-title {
+    font-size: 22px;
+  }
+
+  .order-detail {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 0;
+  }
+
+  .order-detail strong {
+    text-align: left;
+    font-size: 16px;
+  }
+}
+
+/* Mobile Phones */
+@media (max-width: 480px) {
+  .search-form {
+    margin: 15px auto;
+    padding: 0 10px;
+  }
+
+  .search-field ::ng-deep .mat-form-field-label {
+    font-size: 14px;
+  }
+
+  .search-field ::ng-deep input {
+    font-size: 14px;
+    padding: 14px 0;
+  }
+
+  .order-detail-container mat-card {
+    padding: 20px 15px;
+    border-radius: 8px;
+  }
+
+  .order-detail-container mat-card-title {
+    font-size: 20px;
+  }
+
+  .order-detail {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .order-detail strong {
+    font-size: 15px;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+  .order-detail-container mat-card-title {
+    font-size: 18px;
+  }
+
+  .order-detail {
+    font-size: 13px;
+  }
+
+  .order-detail strong {
+    font-size: 14px;
+  }
+}

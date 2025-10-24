@@ -1,0 +1,48 @@
+<form [formGroup]="searchOrderForm" class="search-form" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Theo dõi đơn hàng</mat-label>
+        <input matInput formControlName="trackingId" placeholder="Nhập mã theo dõi đơn hàng*" />
+        <button mat-icon-button matSuffix type="submit">
+        <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+    <div class="order-detail-container" *ngIf="order">
+        <mat-card>
+        <mat-card-header>
+            <mat-card-title>Chi tiết đơn hàng</mat-card-title>
+        </mat-card-header>
+        <div class="order-detail">
+            Id theo dõi đơn hàng
+            <strong>{{order.trackingId}}</strong>
+        </div>
+        <div class="order-detail">
+            Tên 
+            <strong>{{order.userName}}</strong>
+        </div>
+        <div class="order-detail">
+            Địa chỉ
+            <strong>{{order.address}}</strong>
+        </div>
+        <div class="order-detail">
+            Giá trị đơn hàng
+            <strong>{{order.totalPrice | number:'1.0-0'}} VND</strong>
+        </div>
+        <div class="order-detail">
+            Ghi chú đơn hàng
+            <strong>{{order.orderDescription || 'Không có mô tả'}}</strong>
+        </div>
+        
+        <div class="order-detail">
+            Trạng thái
+            <strong>{{getStatusInVietnamese(order.orderStatus)}}</strong>
+        </div>
+        <div class="order-detail">
+            Ngày đặt hàng
+            <strong>{{ order.date | date: 'dd/MM/yyyy HH:mm' }}</strong>
+        </div>
+
+        </mat-card>
+    </div>
+
+    
+</form>

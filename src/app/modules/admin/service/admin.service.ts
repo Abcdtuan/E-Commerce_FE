@@ -31,9 +31,14 @@ export class AdminService {
     });
   }
 
-  getAllProducts(): Observable<any> {
+  getAllProducts(page: number, size: number): Observable<any> {
+    const params = {
+      page: page.toString(),
+      size: size.toString()
+    }
     return this.http.get(BASIC_URL + "/api/admin/products", {
       headers: this.createAuthorizationHeader(),
+      params: params
     });
   }
 

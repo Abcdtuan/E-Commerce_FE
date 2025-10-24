@@ -1,9 +1,9 @@
 <div class="container">
-    <h2>Add Product</h2>
+    <h2>Thêm sản phẩm</h2>
     <form [formGroup]="productForm" (ngSubmit)="addProduct()">
         <div class="file-upload-container">
             <label for="fileInput" class="file-upload-label">
-                <span>Select A File</span>
+                <span>Chọn file ảnh</span>
                 <input type = "file" id="fileInput" multiple
                  (change)="onFileSelected($event)" hidden/>
                 <mat-icon>attach_file</mat-icon>
@@ -17,14 +17,14 @@
             </div>
 
             <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Select A Category</mat-label>
+                <mat-label>Danh mục</mat-label>
                 <mat-select formControlName="categoryId" name="categoryId">
                     <mat-option *ngFor="let category of listOfCategories" [value]="category.id">
                         {{ category.name }}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="productForm.get('categoryId')?.hasError('required')">
-                    This input is required.
+                    Danh mục là bắt buộc
                 </mat-error>
                 <button mat-button color="accent" type="button" (click)="showCategoryForm = true">
                     <mat-icon>add</mat-icon>
@@ -35,27 +35,27 @@
             <form [formGroup]="categoryForm">
                 <div class="category-dialog">
                     <div class="dialog-header">
-                        <h3>Add New Category</h3>
+                        <h3>Thêm danh mục</h3>
                         <button class="close-button" (click)="showCategoryForm = false">
                             <mat-icon>close</mat-icon>
                         </button>
                     </div>
                     
                     <mat-form-field appearance="outline" class="form-field">
-                        <mat-label>Category Name</mat-label>
-                        <input matInput type="text" formControlName="name" placeholder="Enter category name" />
+                        <mat-label>Tên Danh mục</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Nhập tên danh mục" />
                     </mat-form-field>
 
                     <mat-form-field appearance="outline" class="form-field">
-                        <mat-label>Description</mat-label>
-                        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                        <mat-label>Mô tả</mat-label>
+                        <textarea matInput placeholder="Mô tả" formControlName="description"></textarea>
                     </mat-form-field>
 
                     <div class="category-buttons">
                         <button mat-raised-button color="primary" type="button" (click)="createCategory()">
-                            Save Category
+                            Lưu
                         </button>
-                        <button mat-button type="button" (click)="showCategoryForm = false">Cancel</button>
+                        <button mat-button type="button" (click)="showCategoryForm = false">Hủy</button>
                     </div>
                 </div>
             </form>
@@ -63,31 +63,31 @@
 
 
             <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Product Name</mat-label>
-                <input matInput type="text" formControlName="name" placeholder="Enter product name" />
+                <mat-label>Tên </mat-label>
+                <input matInput type="text" formControlName="name" placeholder="nhập tên" />
                 <mat-error *ngIf="productForm.get('name')?.hasError('required')">
-                    This input is required.
+                    Tên sản phẩm là bắt buộc.
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Price</mat-label>
-                <input matInput type="number" formControlName="price" placeholder="Price" min="0"/>
+                <mat-label>Giá</mat-label>
+                <input matInput type="number" formControlName="price" placeholder="Giá" min="0"/>
                 <mat-error *ngIf="productForm.get('price')?.hasError('required')">
-                    This input is required.
+                    Giá sản phẩm là bắt buộc.
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="form-field">
-                <mat-label>Description</mat-label>
-                <textarea matInput placeholder="Description" formControlName="description"></textarea>
+                <mat-label>Mô tả</mat-label>
+                <textarea matInput placeholder="Mô tả" formControlName="description"></textarea>
                 <mat-error *ngIf="productForm.get('description')?.hasError('required')">
-                    This Input Is Required
+                    Mô tả sản phẩm là bắt buộc.
                 </mat-error>
             </mat-form-field>
 
             <button mat-raised-button color="primary" type="submit">
-                Add Product
+                Thêm
             </button>
 
         </div>

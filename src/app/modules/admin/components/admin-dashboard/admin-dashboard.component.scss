@@ -212,6 +212,25 @@
     background-color: #e53935;
   }
 }
+.pagination-container {
+  display: flex;
+  justify-content: center; /* căn giữa theo chiều ngang */
+  align-items: center;
+  margin: 30px 0;
+  gap: 15px; /* khoảng cách giữa các nút */
+}
+
+.pagination-container button {
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.page-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
 
 /* Responsive */
 @media screen and (max-width: 1200px) {

@@ -26,6 +26,9 @@ import { AdvertisementComponent } from '../advertisement/advertisement.component
 })
 export class CustomerDashboardComponent {
 
+  page: number = 0;
+  size: number = 12;
+  totalPages: number = 0;
   products: any[] = [];
   searchProducts!: FormGroup;
 
@@ -34,18 +37,19 @@ export class CustomerDashboardComponent {
   
 
   ngOnInit() {
-    this.getAllProducts();
+    this.loadProducts();
     this.searchProducts = this.fb.group({
       title: [null, [Validators.required]]
     })
   }
-  getAllProducts() {
-  this.products = [];
-  this.customerService.getAllProducts().subscribe((res: any[]) => {
-    res.forEach((productDto: any) => {
+  loadProducts() {
+    this.products = [];
+    this.customerService.getAllProducts(this.page, this.size).subscribe((res: any) => {
+    this.totalPages = res.totalPages;
+    res.content.forEach((productDto: any) => {
       const images = productDto.byteImages.map((imgByte: string) => ({
         processedImg: 'data:image/jpeg;base64,' + imgByte
-      }));
+      })) || [];
       const product = {
         ...productDto,
         images: images,
@@ -55,6 +59,18 @@ export class CustomerDashboardComponent {
       this.products.push(product);
     });
   });
+  }
+  nextPage() {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
+      this.loadProducts();
+    }
+  }
+  prevPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.loadProducts();
+    }
   }
   submitSearch() {
     this.products = [];

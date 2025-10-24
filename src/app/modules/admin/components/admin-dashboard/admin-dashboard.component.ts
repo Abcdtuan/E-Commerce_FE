@@ -26,26 +26,30 @@ export class AdminDashboardComponent {
 
   products: any[] = [];
   searchProducts!: FormGroup;
+  page: number = 0;
+  size: number = 12;
+  totalPages: number = 0; 
   constructor(private adminService: AdminService, 
               private fb: FormBuilder,
               private matSnackBar: MatSnackBar
    ) { }
 
   ngOnInit(){
-    this.getAllProducts();
+    this.loadProducts();
     this.searchProducts = this.fb.group({  
       title: [null,[Validators.required]],
     });
 
   }
 
-  getAllProducts() {
+  loadProducts() {
   this.products = [];
-  this.adminService.getAllProducts().subscribe((res: any[]) => {
-    res.forEach((productDto: any) => {
+  this.adminService.getAllProducts(this.page, this.size).subscribe((res: any) => {
+    this.totalPages = res.totalPages;
+    res.content.forEach((productDto: any) => {
       const images = productDto.byteImages.map((imgByte: string) => ({
         processedImg: 'data:image/jpeg;base64,' + imgByte
-      }));
+      })) || [];
       const product = {
         ...productDto,
         images: images,
@@ -56,6 +60,18 @@ export class AdminDashboardComponent {
     });
   });
 }
+  nextPage() {
+    if (this.page < this.totalPages - 1) {
+      this.page++;
+      this.loadProducts();
+    }
+  }
+  prevPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.loadProducts();
+    }
+  }
 
 submitSearch() {
   this.products = [];
@@ -63,7 +79,6 @@ submitSearch() {
 
   this.adminService.getAllProductsByName(title).subscribe((res: any[]) => {
     res.forEach((productDto: any) => {
-      // Chuyển byteImages thành processedImg để hiển thị
       const images = productDto.byteImages.map((imgByte: string) => ({
         processedImg: 'data:image/jpeg;base64,' + imgByte
       }));
@@ -87,7 +102,7 @@ submitSearch() {
         this.matSnackBar.open("Product Deleted Successfully", "Close", {
           duration: 3000,
         })
-        this.getAllProducts();
+        this.loadProducts();
       },
     error: (err) =>{
       this.matSnackBar.open("Error Deleting Product", "Close", {

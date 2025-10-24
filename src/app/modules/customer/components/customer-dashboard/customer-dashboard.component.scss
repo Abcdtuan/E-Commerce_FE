@@ -174,6 +174,24 @@
 .custom-divider {
   margin: 12px 0;
 }
+.pagination-container {
+  display: flex;
+  justify-content: center; /* căn giữa theo chiều ngang */
+  align-items: center;
+  margin: 30px 0;
+  gap: 15px; /* khoảng cách giữa các nút */
+}
+
+.pagination-container button {
+  min-width: 100px;
+  font-weight: 500;
+}
+
+.page-info {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
 
 .product-info {
   width: 100%;

@@ -131,6 +131,16 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     });
   }
+  getAllCategories(): Observable<any>{
+    return this.http.get(BASIC_URL + '/api/customer/categories', {
+      headers: this.createAuthorizationheader()
+    })
+  }
+  getProductsByCategoryId(categoryId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `/api/customer/products/category/${categoryId}`, {
+      headers: this.createAuthorizationheader()
+    })
+  }
 
 
   private createAuthorizationheader(): HttpHeaders{

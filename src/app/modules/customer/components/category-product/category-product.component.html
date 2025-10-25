@@ -1,0 +1,31 @@
+<div class="products-grid">
+        <mat-card class="product-card" *ngFor="let product of products">
+            <div class="product-image-container">
+                <img [src]="product.thumbnail" alt="product-image" class="product-image" [routerLink]="'/customer/product-details/' + product.id">
+                
+            </div>
+            
+            <mat-card-content class="product-content">
+                <div class="product-header">
+                    <h2 class="product-name">{{ product.name }}</h2>
+                </div>
+
+                <div class="product-info">
+                    <div class="info-row">
+                        <span class="info-label">
+                            Giá bán:
+                        </span>
+                        <span class="info-value-price">{{ product.price | number:'1.0-0' }} VND</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">
+                            Danh mục:
+                        </span>
+                        <span >{{ product.categoryName }}</span>
+                    </div>
+                </div>
+
+                
+            </mat-card-content>
+        </mat-card>
+    </div>

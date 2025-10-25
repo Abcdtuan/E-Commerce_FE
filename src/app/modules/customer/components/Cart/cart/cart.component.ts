@@ -109,8 +109,8 @@ export class CartComponent {
   }
   placeOrder(){
     this.dialog.open(PlaceOrderComponent, {
-      width: '600px',  // tăng chiều rộng
-      maxWidth: '90vw', // responsive, tối đa 90% màn hình
+      width: '600px',  
+      maxWidth: '90vw', 
     });
 
     

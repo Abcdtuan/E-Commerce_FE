@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { PaymentComponent } from './components/payment/payment.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ReviewComponent } from './review/review.component';
+import { CategoryProductComponent } from './components/category-product/category-product.component';
 
 
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'product-details/:productId', component: ProductDetailComponent},
   {path: 'payment-return', component: PaymentComponent},
   {path: 'orders', component: OrdersComponent},
-  {path: 'review/:orderId',component: ReviewComponent}
+  {path: 'review/:orderId',component: ReviewComponent},
+  {path: 'category/:categoryId', component: CategoryProductComponent}
 
   
 ];

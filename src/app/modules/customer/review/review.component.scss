@@ -1,4 +1,4 @@
-/* order-products.component.css */
+
 
 .order-products-container {
   padding: 16px;
@@ -30,9 +30,9 @@ mat-list {
 
 .product-item {
   height: auto !important;
-  min-height: 100px;
+  min-height: 100px; /* Tăng lên để phù hợp với ảnh lớn hơn */
   padding: 16px 0;
-  border-bottom: 1px solid #e3e8ef;
+  border-bottom: 1px solid #e0e0e0;
   display: flex;
   align-items: flex-start;
   gap: 16px;
@@ -43,13 +43,13 @@ mat-list {
   border-bottom: none;
 }
 
-/* Thumbnail */
+
 .thumb {
-  width: 80px;
-  height: 80px;
+  width: 100px; 
+  height: 100px; 
   object-fit: cover;
   border-radius: 4px;
-  border: 1px solid #d0dae6;
+  border: 1px solid #e0e0e0;
   flex-shrink: 0;
 }
 
@@ -80,7 +80,7 @@ mat-list {
   font-weight: 600;
 }
 
-/* Actions */
+/* Actions - Định vị ở góc dưới phải */
 .product-actions {
   position: absolute;
   bottom: 16px;
@@ -110,7 +110,7 @@ mat-list {
   gap: 16px;
   padding: 16px;
   background-color: #ffffff;
-  border-top: 2px solid #e3e8ef;
+  border-top: 2px solid #e0e0e0;
   margin: 0;
 }
 
@@ -126,7 +126,7 @@ mat-list {
   color: #d32f2f;
 }
 
-/* Empty state */
+
 .order-card.empty {
   text-align: center;
   padding: 40px 16px;
@@ -151,7 +151,7 @@ mat-list {
   }
 
   .thumb {
-    width: 60px;
+    width: 60px; 
     height: 60px;
   }
 
@@ -171,7 +171,7 @@ mat-list {
     position: static;
     width: 100%;
     justify-content: flex-end;
-    margin-left: 76px;
+    margin-left: 76px; 
   }
 
   .order-total {

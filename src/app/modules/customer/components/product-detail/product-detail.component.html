@@ -49,7 +49,6 @@
   <h2>Đánh giá từ khách hàng</h2>
   
   <div class="review-item" *ngFor="let review of reviewList">
-    <!-- Header: Tên và ngày -->
     <div class="review-header">
       <div class="review-user">
         <span class="username">{{ review.userName }}</span>
@@ -57,7 +56,6 @@
       </div>
     </div>
 
-    <!-- Rating (Sao) -->
     <div class="review-rating">
       <span *ngFor="let star of getStarArray(review.rating)" 
             class="star" 
@@ -65,13 +63,9 @@
         ★
       </span>
     </div>
-
-    <!-- Mô tả đánh giá -->
     <div class="review-description">
       <p>{{ review.description }}</p>
     </div>
-
-    <!-- Hình ảnh đánh giá (nếu có) -->
     <div class="review-images" *ngIf="review.images && review.images.length > 0">
       <img *ngFor="let image of review.images" 
            [src]="image.processedReviewImg" 
@@ -81,7 +75,6 @@
   </div>
 </div>
 
-<!-- Hiển thị khi chưa có đánh giá -->
 <div class="no-reviews" *ngIf="reviewList && reviewList.length === 0">
   <p>Chưa có đánh giá nào cho sản phẩm này.</p>
 </div>

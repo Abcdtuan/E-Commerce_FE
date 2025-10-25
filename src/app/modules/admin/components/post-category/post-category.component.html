@@ -21,7 +21,7 @@
           <td>{{ category.description }}</td>
           <td class="actions-cell">
             <div class="actions">
-                <button class="btn update" (click)="openUpdateModal(category)">Cập nhật</button>
+                <button class="btn update" (click)="openUpdate(category)">Cập nhật</button>
                 <button class="btn delete" (click)="deleteCategory(category.id)">Xóa</button>
             </div>
           </td>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<!-- 🔹 Form modal (cập nhật hoặc thêm mới) -->
+
 <div class="modal" *ngIf="showUpdateModal || showAddModal">
   <div class="modal-content">
     <h3>{{ showAddModal ? 'Thêm mới danh mục' : 'Cập nhật danh mục' }}</h3>
@@ -45,7 +45,7 @@
 
       <div class="modal-actions">
         <button type="submit" [disabled]="categoryForm.invalid">{{ showAddModal ? 'Thêm' : 'Lưu' }}</button>
-        <button type="button" (click)="closeModal()">Hủy</button>
+        <button type="button" (click)="close()">Hủy</button>
       </div>
     </form>
   </div>

@@ -11,7 +11,7 @@
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="/admin/dashboard">Sport Zone </span>
     <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
-    <button mat-button routerLink="/admin/analytics" routerLinkActive="active">Analytics</button>
+    <button mat-button routerLink="/admin/analytics" routerLinkActive="active">Thống kê đơn hàng</button>
     <button mat-button routerLink="/admin/product" routerLinkActive="active">Products</button>
     <button mat-button routerLink="/admin/orders" routerLinkActive="active">Orders</button>
     <button mat-button routerLink="/admin/category" routerLinkActive="active">Category</button>
@@ -25,6 +25,12 @@
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="/customer/dashboard">Sport Zone </span>
     <button mat-button routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button [matMenuTriggerFor]="categoryMenu">Danh mục</button>
+      <mat-menu #categoryMenu="matMenu">
+        <button mat-menu-item *ngFor="let cat of categories" [routerLink]="['/customer/category', cat.id]">
+          {{ cat.name }}
+        </button>
+      </mat-menu>
     <button mat-button routerLink="/customer/orders" routerLinkActive="active">Đơn hàng</button>
     <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">Wishlist</button>
     <button mat-button routerLink="/customer/profile" routerLinkActive="active">Profile</button>

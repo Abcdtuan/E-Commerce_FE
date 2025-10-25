@@ -1,0 +1,122 @@
+.order-status-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.order-status-card {
+    flex: 1;
+    min-width: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.order-status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.status-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.order-status-card:nth-child(1) .status-avatar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.order-status-card:nth-child(2) .status-avatar {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.order-status-card:nth-child(3) .status-avatar {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.status-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.analytics-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.analytics-card {
+    flex: 1;
+    min-width: 280px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.analytics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.metric-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+.analytics-card:nth-child(1) .metric-avatar {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.analytics-card:nth-child(2) .metric-avatar {
+    background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+}
+
+.metric-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+}
+
+.metric-subtext {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.previous-month {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.previous-month .metric-value {
+    font-size: 20px;
+    color: #666;
+}
+
+mat-card-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #444;
+}
+
+mat-card-content {
+    padding: 16px 0;
+}

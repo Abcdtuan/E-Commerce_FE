@@ -24,7 +24,7 @@ export class UpdateProductComponent {
   
     listOfCategories: any = [];
   
-      selectedFiles: File[] = [];
+    selectedFiles: File[] = [];
   
     imagePreview: (string | ArrayBuffer)[] = [];
 

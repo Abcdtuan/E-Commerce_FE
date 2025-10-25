@@ -1,0 +1,39 @@
+<div style="padding: 30px;">
+    <app-order-by-status [data]="data"></app-order-by-status>
+</div>
+<div class="analytics-container">
+    <mat-card class="analytics-card">
+        <mat-card-header>
+            <div mat-card-avatar class="metric-avatar">
+                E
+            </div>
+            <mat-card-title>Doanh thu</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="metric-value">{{ data.currentMonthEarnings | number:'1.0-0' }} VND  </div>
+            <div class="metric-subtext">Tháng này</div>
+        </mat-card-content>
+        <mat-card-content class="previous-month">
+            <div class="metric-value">{{ data.previousMonthEarnings | number:'1.0-0'}} VND</div>
+            <div class="metric-subtext">Tháng trước</div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="analytics-card">
+        <mat-card-header>
+            <div mat-card-avatar class="metric-avatar">
+             O
+            </div>
+            <mat-card-title>Đơn hàng</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="metric-value">{{ data.currentMonthOrders }}</div>
+            <div class="metric-subtext">Thánh này</div>
+        </mat-card-content>
+        <mat-card-content class="previous-month">
+            <div class="metric-value">{{ data.previousMonthOrders }}</div>
+            <div class="metric-subtext">Tháng trước</div>
+        </mat-card-content>
+    </mat-card>
+</div>
+

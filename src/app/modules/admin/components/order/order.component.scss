@@ -1,191 +1,277 @@
-/* Container tổng */
+/* Order Container */
 .order-container {
   padding: 20px;
   max-width: 100%;
   margin: 0 auto;
+}
 
-  .header {
-    margin-bottom: 20px;
+.header {
+  margin-bottom: 20px;
+}
 
-    h2 {
-      font-size: 24px;
-      font-weight: 600;
-      color: #333;
-      margin: 0;
-    }
+.header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* Table Wrapper */
+.table-wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+/* Table Styling */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.order-table thead {
+  background-color: #f8f9fa;
+}
+
+.order-table th {
+  padding: 16px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.order-table tbody tr {
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.2s;
+}
+
+.order-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.order-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.order-table td {
+  padding: 16px 12px;
+  color: #495057;
+}
+
+/* Bold Cell for Amount */
+.bold-cell {
+  font-weight: 600;
+  color: #1976d2;
+  font-size: 15px;
+}
+
+/* Status Badge */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-placed {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-shipped {
+  background-color: #cfe2ff;
+  color: #084298;
+  border: 1px solid #9ec5fe;
+}
+
+.status-delivered {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #a3cfbb;
+}
+
+.status-cancelled {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f1aeb5;
+}
+
+/* Button thay đổi trạng thái */
+.status-change-btn {
+  padding: 8px 20px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(25, 118, 210, 0.2);
+  min-width: 100px;
+
+  &:hover {
+    background: #1565c0;
+    box-shadow: 0 3px 8px rgba(25, 118, 210, 0.3);
   }
 
-  .table-wrapper {
-    background: #fff;
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 3px rgba(25, 118, 210, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Styling cho menu dropdown */
+.status-menu {
+  .mat-menu-content {
+    padding: 8px;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow-x: auto;
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 14px;
-
-      thead {
-        background-color: #f8f9fa;
-
-        th {
-          padding: 16px 12px;
-          text-align: left;
-          font-weight: 600;
-          color: #495057;
-          border-bottom: 2px solid #dee2e6;
-          white-space: nowrap;
-        }
-      }
-
-      tbody {
-        tr {
-          border-bottom: 1px solid #dee2e6;
-          transition: background-color 0.2s;
-
-          &:hover {
-            background-color: #f8f9fa;
-          }
-
-          td {
-            padding: 16px 12px;
-            color: #495057;
-
-            &.bold-cell {
-              font-weight: 600;
-              color: #1976d2;
-            }
-          }
-
-          .status-badge {
-            padding: 6px 14px;
-            border-radius: 16px;
-            font-size: 12px;
-            font-weight: 600;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-
-            &.status-placed {
-              background-color: #fff3cd;
-              color: #856404;
-              border: 1px solid #ffeaa7;
-            }
-
-            &.status-shipped {
-              background-color: #cfe2ff;
-              color: #084298;
-              border: 1px solid #9ec5fe;
-            }
-
-            &.status-delivered {
-              background-color: #d1e7dd;
-              color: #0f5132;
-              border: 1px solid #a3cfbb;
-            }
-
-            &.status-cancelled {
-              background-color: #f8d7da;
-              color: #842029;
-              border: 1px solid #f1aeb5;
-            }
-          }
-        }
-
-        tr:empty::before {
-          content: 'Không có đơn hàng nào';
-          display: block;
-          text-align: center;
-          padding: 40px;
-          color: #6c757d;
-          font-style: italic;
-        }
-      }
-    }
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   }
 
-  .status-change-btn {
-    padding: 8px 20px;
-    background: #1976d2;
-    color: white;
-    border: none;
+  button[mat-menu-item] {
+    padding: 10px 16px;
     border-radius: 6px;
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
     font-size: 14px;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 100px;
 
-    &:hover {
-      background: #1565c0;
-    }
-
-    &:active {
-      transform: scale(0.98);
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 }
 
+/* Màu sắc cho từng loại trạng thái trong menu */
+.menu-item-processing:hover {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.menu-item-shipped:hover {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.menu-item-delivered:hover {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.menu-item-cancelled:hover {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+/* Empty State */
+.order-table tbody tr:empty::before {
+  content: 'Không có đơn hàng nào';
+  display: block;
+  text-align: center;
+  padding: 40px;
+  color: #6c757d;
+  font-style: italic;
+}
+
 /* Responsive */
+@media screen and (max-width: 1200px) {
+  .order-container {
+    padding: 15px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  .order-table {
+    min-width: 1000px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .order-container {
     padding: 10px;
+  }
 
-    .header h2 {
-      font-size: 20px;
-    }
+  .header h2 {
+    font-size: 20px;
+  }
 
-    table {
-      font-size: 13px;
+  .order-table {
+    min-width: 800px;
+    font-size: 13px;
+  }
 
-      th, td {
-        padding: 12px 8px;
-      }
+  .order-table th,
+  .order-table td {
+    padding: 12px 8px;
+  }
 
-      .bold-cell {
-        font-size: 14px;
-      }
+  .bold-cell {
+    font-size: 14px;
+  }
 
-      .status-badge {
-        padding: 4px 10px;
-        font-size: 11px;
-      }
+  .status-badge {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
 
-      .status-change-btn {
-        padding: 6px 16px;
-        font-size: 13px;
-        min-width: 90px;
-      }
-    }
+  .status-change-btn {
+    padding: 6px 16px;
+    font-size: 13px;
+    min-width: 90px;
+  }
+
+  .status-menu button[mat-menu-item] {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .order-container {
     padding: 8px;
+  }
 
-    .header h2 {
-      font-size: 18px;
-    }
+  .header h2 {
+    font-size: 18px;
+  }
 
-    table {
-      font-size: 12px;
+  .table-wrapper {
+    border-radius: 4px;
+  }
 
-      th, td {
-        padding: 10px 6px;
-      }
+  .order-table {
+    font-size: 12px;
+  }
 
-      .status-badge {
-        padding: 3px 8px;
-        font-size: 10px;
-      }
+  .order-table th,
+  .order-table td {
+    padding: 10px 6px;
+  }
 
-      .status-change-btn {
-        padding: 5px 12px;
-        font-size: 12px;
-        min-width: 80px;
-      }
-    }
+  .status-change-btn {
+    padding: 5px 12px;
+    font-size: 12px;
+    min-width: 80px;
+  }
+
+  .status-menu button[mat-menu-item] {
+    padding: 7px 10px;
+    font-size: 12px;
   }
 }

@@ -48,7 +48,7 @@ export class PostCategoryComponent {
     })
   }
 
-  openUpdateModal(category: any) {
+  openUpdate(category: any) {
     this.showUpdateModal = true;
     this.selectedCategoryId = category.id;
     this.categoryForm.patchValue({
@@ -57,7 +57,7 @@ export class PostCategoryComponent {
     });
   }
 
-  closeModal() {
+  close() {
     this.showUpdateModal = false;
     this.showAddModal = false;
     this.categoryForm.reset();
@@ -67,7 +67,7 @@ export class PostCategoryComponent {
     if (this.selectedCategoryId !== null){
       this.adminService.updateCategory(this.selectedCategoryId, update).subscribe(() => {
       this.getAllCategorys();
-      this.closeModal();
+      this.close();
     })
     }
   }
@@ -80,7 +80,7 @@ addCategory() {
   const newCategory = this.categoryForm.value;
   this.adminService.createCategory(newCategory).subscribe(() => {
     this.getAllCategorys();
-    this.closeModal();
+    this.close();
   });
 }
 

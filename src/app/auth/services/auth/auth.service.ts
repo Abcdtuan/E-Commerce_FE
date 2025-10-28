@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserStorageService } from '../storage/user-storage.service';
 
 const BASIC_URL = "http://localhost:8080/";
@@ -35,4 +35,28 @@ export class AuthService {
     return this.http.get(BASIC_URL + `order/${trackingId}`, {
     });
   }
+
+  sendOtp(email: string): Observable<any>{
+    const params = new HttpParams().set('email', email);
+    return this.http.post(BASIC_URL + `api/auth/password/send-otp`, null, {
+      params,
+      responseType:'text'
+    })
+  }
+  verifyOtp(email: string, otp: string): Observable<string> {
+    const params = new HttpParams().set('email', email).set('otp', otp);
+    return this.http.post(BASIC_URL + `api/auth/password/verify-otp`, null, {
+      params,
+      responseType: 'text',
+    });
+  }
+
+  resetPassword(email: string, newPassword: string): Observable<string> {
+    const params = new HttpParams().set('email', email).set('newPassword', newPassword);
+    return this.http.post(BASIC_URL + `api/auth/password/reset-password`, null, {
+      params,
+      responseType: 'text',
+    });
+  }
+
 }

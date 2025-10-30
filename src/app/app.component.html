@@ -1,30 +1,32 @@
 <div *ngIf ="!isCustomerLoggedIn && !isAdminLoggedIn">
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="">Sport Zone</span>
-    <button mat-button routerLink="/trackOrder" routerLinkActive="active">Track Order</button>
-    <button mat-button routerLink="/sign-up" routerLinkActive="active">Register</button>
-    <button mat-button routerLink="/login" routerLinkActive="active">Login</button>
+    <button mat-button routerLink="/trackOrder" routerLinkActive="active">Theo dõi đơn hàng</button>
+    <button mat-button routerLink="/sign-up" routerLinkActive="active">Đăng ký</button>
+    <button mat-button routerLink="/login" routerLinkActive="active">Đăng nhập</button>
   </mat-toolbar>
  
 </div>
 <div *ngIf ="isAdminLoggedIn">
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="/admin/dashboard">Sport Zone </span>
-    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Trang chủ</button>
     <button mat-button routerLink="/admin/analytics" routerLinkActive="active">Thống kê đơn hàng</button>
-    <button mat-button routerLink="/admin/product" routerLinkActive="active">Products</button>
-    <button mat-button routerLink="/admin/orders" routerLinkActive="active">Orders</button>
-    <button mat-button routerLink="/admin/category" routerLinkActive="active">Category</button>
-    <button mat-button routerLink="/admin/post-coupon" routerLinkActive="active">Post Coupon</button>
-    <button mat-button routerLink="/admin/coupons" routerLinkActive="active">Coupon</button>
-    <button mat-button routerLinkActive="active" (click)="logOut()">logout</button>
+    <button mat-button routerLink="/admin/product" routerLinkActive="active">Thêm sản phẩm</button>
+    <button mat-button routerLink="/admin/orders" routerLinkActive="active">Đơn hàng</button>
+    <button mat-button routerLink="/admin/category" routerLinkActive="active">Quản lý danh mục</button>
+    <button mat-button routerLink="/admin/post-coupon" routerLinkActive="active">thêm mã giảm giá</button>
+    <button mat-button routerLink="/admin/coupons" routerLinkActive="active">Quản lý mã giảm giá</button>
+    <button mat-button routerLink="/admin/users" routerLinkActive="active">Quản lý người dùng</button>
+    
+    <button mat-button routerLinkActive="active" (click)="logOut()">Đăng xuất</button>
   </mat-toolbar>
 </div>
 
 <div *ngIf ="isCustomerLoggedIn">
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="/customer/dashboard">Sport Zone </span>
-    <button mat-button routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button routerLink="/customer/dashboard" routerLinkActive="active">Trang chủ</button>
     <button mat-button [matMenuTriggerFor]="categoryMenu">Danh mục</button>
       <mat-menu #categoryMenu="matMenu">
         <button mat-menu-item *ngFor="let cat of categories" [routerLink]="['/customer/category', cat.id]">
@@ -32,8 +34,7 @@
         </button>
       </mat-menu>
     <button mat-button routerLink="/customer/orders" routerLinkActive="active">Đơn hàng</button>
-    <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">Wishlist</button>
-    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Profile</button>
+    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Hồ sơ</button>
     <button mat-button routerLink="/customer/cart" routerLinkActive="active">
       <mat-icon style="font-size: 20px; line-height: 1;">shopping_cart</mat-icon>
     </button>
@@ -41,7 +42,7 @@
       <mat-icon style="font-size: 20px; line-height: 1;">account_circle</mat-icon>
     </button>
     
-    <button mat-button routerLinkActive="active" (click)="logOut()">Logout</button>
+    <button mat-button routerLinkActive="active" (click)="logOut()">Đăng xuất</button>
   </mat-toolbar>
 </div>
 

@@ -1,0 +1,45 @@
+<div class="user-management">
+  <h2>Quản lý người dùng</h2>
+  
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Tên</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Trạng thái</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <ng-container *ngIf="user.role !== 'ADMIN'">
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                <span [ngClass]="user.active ? 'badge bg-success' : 'badge bg-danger'">
+                    {{ user.active ? 'Hoạt động' : 'Khóa' }}
+                </span>
+                </td>
+                <td>
+                <button 
+                    [ngClass]="user.active ? 'btn btn-sm btn-danger' : 'btn btn-sm btn-success'"
+                    (click)="toggleStatus(user.id)">
+                    {{ user.active ? 'Khóa tài khoản' : 'Kích hoạt' }}
+                </button>
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    
+    
+    <div class="empty-state" *ngIf="users.length === 0">
+      <p>Chưa có người dùng nào</p>
+    </div>
+  </div>
+</div>

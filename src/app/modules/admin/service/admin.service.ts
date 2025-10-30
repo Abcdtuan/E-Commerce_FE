@@ -120,6 +120,20 @@ export class AdminService {
     })
   }
 
+  getAllUsers(): Observable<any>{
+    return this.http.get(BASIC_URL + "/api/admin/users",{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+  toggleUserStatus(id: number): Observable<any>{
+    return this.http.put(BASIC_URL + `/api/admin/users/toggle-status/${id}`,
+      {}, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
       'Authorization', 'Bearer ' + UserStorageService.getToken()

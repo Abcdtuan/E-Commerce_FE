@@ -1,3 +1,4 @@
+import { ProfileComponent } from './../components/profile/profile.component';
 import { UserStorageService } from './../../../auth/services/storage/user-storage.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -138,6 +139,18 @@ export class CustomerService {
   }
   getProductsByCategoryId(categoryId: number): Observable<any>{
     return this.http.get(BASIC_URL + `/api/customer/products/category/${categoryId}`, {
+      headers: this.createAuthorizationheader()
+    })
+  }
+  getProfile():Observable<any>{
+    const userId = UserStorageService.getUserId();
+    return this.http.get(BASIC_URL + `/api/customer/user/${userId}`,{
+      headers: this.createAuthorizationheader()
+    })
+  }
+  changePassword(userDto: any): Observable<any>{
+    userDto.userId = UserStorageService.getUserId();
+    return this.http.put(BASIC_URL + '/api/customer/user/changePassword', userDto, {
       headers: this.createAuthorizationheader()
     })
   }

@@ -54,7 +54,6 @@ export class ForgotPasswordComponent {
     this.authService.resetPassword(this.email, this.newPassword).subscribe({
       next: (res) => {
         this.snackBar.open(res, 'Đóng', { duration: 3000 });
-        this.step = 1;
         this.email = this.otp = this.newPassword = '';
         this.router.navigate(['/login'])
       },

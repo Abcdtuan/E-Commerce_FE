@@ -119,6 +119,16 @@ export class AdminService {
       headers: this.createAuthorizationHeader(),
     })
   }
+  getProductStaticstics(month: number, year: number): Observable<any>{
+    const params = {
+      month: month.toString(),
+      year: year.toString()
+    }
+    return this.http.get(BASIC_URL + "/api/admin/order/analytics/products", {
+      headers: this.createAuthorizationHeader(),
+      params: params
+    })
+  }
 
   getAllUsers(): Observable<any>{
     return this.http.get(BASIC_URL + "/api/admin/users",{

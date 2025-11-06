@@ -35,6 +35,18 @@
         <textarea matInput placeholder="Nhập ghi chú (nếu có)" formControlName="orderDescription" rows="3"></textarea>
     </mat-form-field>
 
+    <div class="payment-section">
+        <label>Chọn phương thức thanh toán:</label>
+        <mat-radio-group formControlName="paymentMethod">
+            <mat-radio-button value="TRANSFER">Chuyển khoản</mat-radio-button>
+            <mat-radio-button value="CASH">Tiền mặt</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="placeOrderForm.get('paymentMethod')?.hasError('required')">
+            Vui lòng chọn phương thức thanh toán
+        </mat-error>
+    </div>
+
+
     <div class="button-group">
         <button mat-flat-button color="primary" type="submit" [disabled]="placeOrderForm.invalid">
         Thanh toán

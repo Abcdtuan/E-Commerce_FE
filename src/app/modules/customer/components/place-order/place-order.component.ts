@@ -10,11 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatError } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-place-order',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule, MatError],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, CommonModule, MatError,MatRadioModule],
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.scss'
 })
@@ -37,32 +38,41 @@ export class PlaceOrderComponent {
       name:[null, Validators.required],
       address: [null, Validators.required],
       phone: [null, [Validators.required, Validators.pattern('^\\+?[0-9]{10,15}$')]],
-      orderDescription: [null]
+      orderDescription: [null],
+      paymentMethod: [null, [Validators.required]]
     })
   }
-  placeOrder(){
-    console.log("Dữ liệu gửi đi:", this.placeOrderForm.value);
-    this.customerService.placeOrder(this.placeOrderForm.value).subscribe({
+  placeOrder() {
+    if (this.placeOrderForm.invalid) return;
+
+    const formValue = this.placeOrderForm.value;
+    console.log("Dữ liệu gửi đi:", formValue);
+
+    this.customerService.placeOrder(formValue).subscribe({
       next: (res) => {
-        this.snack.open("Order placed successfully", "Close", {
-          duration: 2000,
-        });
-        this.customerService.createPayment(res.id, res.amount, 'Thanh toán đơn #' + res.id)
-          .subscribe({
-            next: (res) => window.location.href = res.url,
-            error: (err) => this.snack.open("Lỗi tạo thanh toán: " + err.error.message, "Close", { duration: 2000 })
-          });
- 
-        this.closeForm();
+        if (formValue.paymentMethod === 'CASH') {
+          // --- Xử lý tiền mặt ---
+          this.snack.open("Đặt hàng thành công! Thanh toán tiền mặt khi nhận hàng.", "Đóng", { duration: 2000 });
+          this.closeForm();
+        } else if (formValue.paymentMethod === 'TRANSFER') {
+          // --- Xử lý chuyển khoản/VNPAY ---
+          this.customerService.createPayment(res.id, res.amount, `Thanh toán đơn #${res.id}`)
+            .subscribe({
+              next: (payRes) => {
+                window.location.href = payRes.url;
+              },
+              error: (err) => {
+                this.snack.open("Lỗi tạo thanh toán: " + err.error.message, "Đóng", { duration: 2000 });
+              }
+            });
+        } else {
+          this.snack.open("Phương thức thanh toán không hợp lệ", "Đóng", { duration: 2000 });
+        }
       },
       error: (err) => {
-        this.snack.open("Failed to place order: " + err.error.message, "Close", {
-          duration: 2000,
-        });
+        this.snack.open("Đặt hàng thất bại: " + err.error.message, "Đóng", { duration: 2000 });
       }
-
-    })
-    
+    });
   }
   closeForm(){
     this.dialog.closeAll();

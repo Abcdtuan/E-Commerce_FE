@@ -36,6 +36,12 @@
                 routerLink="/customer/review/{{order.id}}">
                 Đánh giá
               </button>
+              <button 
+                *ngIf="order.orderStatus === 'PLACED'" 
+                class="btn-review"
+                routerLink="/customer/review/{{order.id}}">
+                Hủy 
+              </button>
             </div>
           </td>
           <td>{{order.trackingId}}</td>

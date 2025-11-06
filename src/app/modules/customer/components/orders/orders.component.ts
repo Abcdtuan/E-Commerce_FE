@@ -8,7 +8,7 @@ import { AdminRoutingModule } from "../../../admin/admin-routing.module";
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, AdminRoutingModule],
+  imports: [CommonModule, AdminRoutingModule, ReviewComponent],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })

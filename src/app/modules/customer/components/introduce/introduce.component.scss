@@ -1,0 +1,65 @@
+.about-container {
+  background-color: #f9f9f9;
+  padding: 40px;
+  max-width: 900px;
+  margin: 40px auto;
+  border-radius: 12px;
+  line-height: 1.7;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+.title {
+  color: #c19a6b; /* đổi từ #d32f2f */
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.subtitle {
+  color: #c19a6b; /* đổi từ #e53935 */
+  font-weight: 600;
+}
+
+h3 {
+  color: #c19a6b; /* đổi từ #c62828 */
+  margin-top: 30px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin: 8px 0;
+  }
+}
+
+.highlight {
+  color: #c19a6b; /* đổi từ #e53935 */
+  font-weight: bold;
+}
+
+blockquote {
+  border-left: 5px solid #c19a6b; /* đổi từ #e53935 */
+  background: #fff5f5;
+  padding: 10px 20px;
+  font-style: italic;
+  margin: 20px 0;
+  border-radius: 6px;
+}
+
+.core-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0;
+
+  li {
+    background-color: #c19a6b; /* đổi từ #e53935 */
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+}

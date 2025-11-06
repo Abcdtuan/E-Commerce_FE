@@ -99,6 +99,7 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     });
   }
+
   createPayment(orderId: number, amount: number, orderInfo: string): Observable<{url: string}> {
   const body = {
     orderId,
@@ -108,7 +109,7 @@ export class CustomerService {
   return this.http.post<{url: string}>(`${BASIC_URL}/api/payment/create`, body, {
     headers: this.createAuthorizationheader()
   });
-}
+  }
 
   getOrdersByUserId(): Observable<any> {
     const userId = UserStorageService.getUserId();
@@ -153,6 +154,23 @@ export class CustomerService {
     return this.http.put(BASIC_URL + '/api/customer/user/changePassword', userDto, {
       headers: this.createAuthorizationheader()
     })
+  }
+
+  addProductToWishlist(wishlistDto: any): Observable<any>{
+    return this.http.post(BASIC_URL + '/api/customer/wishlist', wishlistDto,{
+      headers: this.createAuthorizationheader()
+    });
+  }
+  getWishlistByUserId(): Observable<any>{
+    const userId = UserStorageService.getUserId();
+    return this.http.get(BASIC_URL + `/api/customer/wishlist/${userId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+  deleteWishlistItem(wishlistId: number): Observable<any>{
+    return this.http.delete(BASIC_URL + `/api/customer/wishlist/deletion/${wishlistId}`, {
+      headers: this.createAuthorizationheader()
+    });
   }
 
 

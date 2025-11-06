@@ -15,8 +15,25 @@
 
 
   <div class="product-info-section">
-    <h1 class="product-title">{{ product.name }}</h1>
-    
+    <div class="product-title-row">
+      <h1 class="product-title">{{ product.name }}</h1>
+      <mat-icon class="heart-icon" (click)="addToWishlist()">favorite</mat-icon>
+    </div>
+
+    <div class="product-stats">
+      <div class="average-rating" *ngIf="product.averageRating">
+        <span *ngFor="let star of getStarArray(product.averageRating)" 
+              class="star" 
+              [class.filled]="star">
+          ★
+        </span>
+        <span class="rating-number">{{ product.averageRating | number:'1.1-1' }}</span>
+      </div>
+      <span class="separator" *ngIf="product.averageRating && product.totalSold">|</span>
+      <div class="total-sold" *ngIf="product.totalSold">
+        <span>Đã bán: {{ product.totalSold }}</span>
+      </div>
+    </div>
 
     <div class="product-price">
       <span class="price-current">{{ product.price | number:'1.0-0' }}₫</span>
@@ -46,7 +63,20 @@
   <p>{{ product.description }}</p>
 </div>
 <div class="reviews-section" *ngIf="reviewList && reviewList.length > 0">
-  <h2>Đánh giá từ khách hàng</h2>
+  <div class="reviews-header">
+    <h2>Đánh giá từ khách hàng</h2>
+    <div class="average-rating-summary" *ngIf="product.averageRating">
+      <span class="rating-number-large">{{ product.averageRating | number:'1.1-1' }}</span>
+      <div class="stars-large">
+        <span *ngFor="let star of getStarArray(product.averageRating)" 
+              class="star" 
+              [class.filled]="star">
+          ★
+        </span>
+      </div>
+      <span class="review-count">({{ reviewList.length }} đánh giá)</span>
+    </div>
+  </div>
   
   <div class="review-item" *ngFor="let review of reviewList">
     <div class="review-header">
@@ -78,5 +108,3 @@
 <div class="no-reviews" *ngIf="reviewList && reviewList.length === 0">
   <p>Chưa có đánh giá nào cho sản phẩm này.</p>
 </div>
-
-

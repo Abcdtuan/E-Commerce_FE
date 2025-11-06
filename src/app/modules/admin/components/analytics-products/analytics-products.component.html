@@ -1,0 +1,32 @@
+<div class="analytics-products-container">
+  <h2>📊 Thống kê sản phẩm theo tháng</h2>
+
+  <div class="filter">
+    <label>Tháng:</label>
+    <select [(ngModel)]="selectedMonth" (change)="analyticsProducts()">
+      <option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="m">{{ m }}</option>
+    </select>
+
+    <label>Năm:</label>
+    <input type="number" [(ngModel)]="selectedYear" (change)="analyticsProducts()">
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ảnh</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Số lượng bán</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td><img [src]="p.processedImg" width="60"></td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.price | currency:'VND' }}</td>
+        <td>{{ p.quantitySold }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

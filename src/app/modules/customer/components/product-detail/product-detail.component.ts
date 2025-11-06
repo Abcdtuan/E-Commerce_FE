@@ -1,4 +1,4 @@
-import { map } from 'rxjs';
+
 import { MatIconModule } from '@angular/material/icon';
 import { Component } from '@angular/core';
 import { CustomerService } from '../../service/customer.service';
@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { UserStorageService } from '../../../../auth/services/storage/user-storage.service';
 
 
 @Component({
@@ -64,6 +65,13 @@ export class ProductDetailComponent {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.product.images.length) % this.product.images.length;
   }
   addProductToCart(id: any) {
+    const userId = UserStorageService.getToken(); 
+    if (!userId) {
+    this.snackBar.open('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!', 'Close', {
+      duration: 5000,
+    });
+      return; 
+    }
     this.customerService.addProductToCart(id).subscribe({
       next: (res) => {
         this.snackBar.open('Thêm sản phẩm thành công!', 'Close', {
@@ -96,6 +104,30 @@ export class ProductDetailComponent {
   }
   getStarArray(rating: number): boolean[] {
     return Array(5).fill(false).map((_, index) => index < rating);
+  }
+  addToWishlist(){
+    const userId = UserStorageService.getToken(); 
+    if (!userId) {
+    this.snackBar.open('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!', 'Close', {
+      duration: 5000,
+    });
+      return; 
+    }
+    const wishlistDto  =  {
+      productId: this.productId,
+      userId: UserStorageService.getUserId()
+    }
+    this.customerService.addProductToWishlist(wishlistDto).subscribe(res =>{
+      if(res.id != null){
+        this.snackBar.open('Thêm sản phẩm vào yêu thích thành công!', 'Close', {
+          duration: 5000,
+      })
+      }else{
+        this.snackBar.open('Sản phẩm đã có trong danh sách yêu thích!', 'Close', {
+        duration: 5000,
+        });
+      }
+    })
   }
 
 }

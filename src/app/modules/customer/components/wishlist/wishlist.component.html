@@ -1,0 +1,43 @@
+<div class="wishlist-container">
+  <div class="wishlist-header">
+    <h1>Danh Sách Yêu Thích</h1>
+    <p class="item-count" *ngIf="product.length > 0">{{ product.length }} sản phẩm</p>
+  </div>
+
+  <div class="wishlist-content" *ngIf="product.length > 0">
+    <div class="wishlist-grid">
+      <div class="wishlist-item" *ngFor="let item of product">
+        <div class="item-image-wrapper">
+          <img [src]="item.processedImg" [alt]="item.productName" class="item-image">
+          <button class="remove-btn" (click)="deteleFromWishlist(item.id)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        
+        <div class="item-details">
+          <h3 class="item-name">{{ item.productName }}</h3>
+          <p class="item-price">{{ item.price | number:'1.0-0' }}₫</p>
+          
+          <div class="item-actions">
+            <button class="btn-add-cart" (click)="addProductToCart(item.productId)">
+              <mat-icon>shopping_cart</mat-icon>
+              Thêm vào giỏ
+            </button>
+            <button class="btn-view-detail" (click)="viewDetail(item.productId)">
+              Xem chi tiết
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="empty-wishlist" *ngIf="product.length === 0">
+    <mat-icon class="empty-icon">favorite_border</mat-icon>
+    <h2>Danh sách yêu thích trống</h2>
+    <p>Hãy thêm sản phẩm yêu thích của bạn vào đây!</p>
+    <button class="btn-continue-shopping" routerLink="/customer/dashboard">
+      Tiếp tục mua sắm
+    </button>
+  </div>
+</div>

@@ -11,7 +11,15 @@
   <mat-toolbar color="primary" class="navbar">
     <span class="navbar-brand" routerLink="/admin/dashboard">Sport Zone </span>
     <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">Trang chủ</button>
-    <button mat-button routerLink="/admin/analytics" routerLinkActive="active">Thống kê đơn hàng</button>
+    <button mat-button [matMenuTriggerFor]="analyticsMenu">Thống kê</button>
+      <mat-menu #analyticsMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/admin/analytics']">
+          Thống kê tổng quát
+        </button>
+        <button mat-menu-item [routerLink]="['/admin/analytics-products']">
+          Thống kê chi tiết
+        </button>
+      </mat-menu>
     <button mat-button routerLink="/admin/product" routerLinkActive="active">Thêm sản phẩm</button>
     <button mat-button routerLink="/admin/orders" routerLinkActive="active">Đơn hàng</button>
     <button mat-button routerLink="/admin/category" routerLinkActive="active">Quản lý danh mục</button>
@@ -35,11 +43,11 @@
       </mat-menu>
     <button mat-button routerLink="/customer/orders" routerLinkActive="active">Đơn hàng</button>
     <button mat-button routerLink="/customer/profile" routerLinkActive="active">Hồ sơ</button>
+    <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">
+      <mat-icon style="font-size: 20px; line-height: 1;">favorite</mat-icon>
+    </button>
     <button mat-button routerLink="/customer/cart" routerLinkActive="active">
       <mat-icon style="font-size: 20px; line-height: 1;">shopping_cart</mat-icon>
-    </button>
-    <button mat-button routerLink="/customer/" routerLinkActive="active">
-      <mat-icon style="font-size: 20px; line-height: 1;">account_circle</mat-icon>
     </button>
     
     <button mat-button routerLinkActive="active" (click)="logOut()">Đăng xuất</button>

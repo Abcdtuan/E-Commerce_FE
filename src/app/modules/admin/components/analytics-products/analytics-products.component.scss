@@ -1,0 +1,30 @@
+.analytics-products-container {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  select, input {
+    padding: 6px;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  img {
+    border-radius: 6px;
+  }
+}

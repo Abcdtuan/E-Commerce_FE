@@ -9,6 +9,9 @@ import { ReviewComponent } from './review/review.component';
 import { CategoryProductComponent } from './components/category-product/category-product.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { IntroduceComponent } from './components/introduce/introduce.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 
@@ -21,7 +24,10 @@ const routes: Routes = [
   {path: 'review/:orderId',component: ReviewComponent},
   {path: 'category/:categoryId', component: CategoryProductComponent},
   {path: 'profile', component:ProfileComponent},
-  {path: 'change-password', component: ChangePasswordComponent}
+  {path: 'change-password', component: ChangePasswordComponent},
+  {path: 'about', component: IntroduceComponent},
+  {path: 'contact', component: ContactComponent },
+  {path: 'wishlist', component: WishlistComponent}
 
   
 ];

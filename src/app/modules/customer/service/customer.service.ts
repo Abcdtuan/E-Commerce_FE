@@ -172,6 +172,21 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     });
   }
+  getBrandByCategoryId(categoryId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `/api/customer/brand/category/${categoryId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+   getAllProductsByCategoryIdAndBrandId(categoryId: number, brandId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `/api/customer/products/filter/${categoryId}/${brandId}`, {
+      headers: this.createAuthorizationheader()
+    });
+  }
+  changeOrderStatus(orderId: number, status: string): Observable<any>{
+    return this.http.put(BASIC_URL + `/api/customer/orders/changeOrderStatus/${orderId}/${status}`, {}, {
+      headers: this.createAuthorizationheader()
+    });
+  }
 
 
   private createAuthorizationheader(): HttpHeaders{

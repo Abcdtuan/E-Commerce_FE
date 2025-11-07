@@ -12,13 +12,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FooterComponent } from "../../../customer/components/footer/footer.component";
 
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, RouterLink, ReactiveFormsModule, MatFormFieldModule, MatInputModule
-  , MatIcon, MatChipsModule],
+  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, RouterLink, ReactiveFormsModule, MatFormFieldModule, MatInputModule,
+    MatIcon, MatChipsModule, FooterComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.scss'
 })

@@ -17,7 +17,7 @@
   <div class="product-info-section">
     <div class="product-title-row">
       <h1 class="product-title">{{ product.name }}</h1>
-      <mat-icon class="heart-icon" (click)="addToWishlist()">favorite</mat-icon>
+      
     </div>
 
     <div class="product-stats">
@@ -58,11 +58,7 @@
     </div>
      
     
-    <div class="action-buttons">
-      <button mat-raised-button color="primary" (click)="addProductToCart(product.id)">
-        Thêm vào giỏ hàng
-      </button>
-    </div>
+    
 
     <div class="category">
       <span>Danh mục:</span> {{ product.categoryName}}

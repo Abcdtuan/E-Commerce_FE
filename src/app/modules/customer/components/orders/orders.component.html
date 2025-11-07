@@ -3,7 +3,14 @@
     <h2>Danh sách Order</h2>
   </div>
 
-  <div class="table-wrapper">
+  <mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="Đã đặt"></mat-tab>
+    <mat-tab label="Đang giao"></mat-tab>
+    <mat-tab label="Đã giao"></mat-tab>
+    <mat-tab label="Đã hủy"></mat-tab>
+  </mat-tab-group>
+
+  <div class="table-wrapper" *ngIf="filteredOrders().length > 0; else noOrders">
     <table class="order-table">
       <thead>
         <tr>
@@ -14,39 +21,38 @@
           <th>Địa chỉ</th>
           <th>Ngày</th>
           <th>Trạng thái</th>
-          <th>ID theo dõi đơn hàng</th>
+          <th>Hành động</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{order.id}}</td>
-          <td>{{order.userName || 'N/A'}}</td>
-          <td class="bold-cell">{{formatCurrency(order.amount)}}</td>
-          <td>{{order.orderDescription || 'Không có mô tả'}}</td>
-          <td>{{order.address}}</td>
+        <tr *ngFor="let order of filteredOrders()">
+          <td>{{ order.id }}</td>
+          <td>{{ order.userName || 'N/A' }}</td>
+          <td class="bold-cell">{{ formatCurrency(order.amount) }}</td>
+          <td>{{ order.orderDescription || 'Không có mô tả' }}</td>
+          <td>{{ order.address }}</td>
           <td>{{ order.date | date: 'dd/MM/yyyy HH:mm' }}</td>
           <td>
-            <div class="status-wrapper">
-              <span class="status-badge" [ngClass]="getStatusClass(order.orderStatus)">
-                {{getStatusLabel(order.orderStatus)}}
-              </span>
-              <button 
-                *ngIf="order.orderStatus === 'DELIVERED'" 
-                class="btn-review"
-                routerLink="/customer/review/{{order.id}}">
-                Đánh giá
-              </button>
-              <button 
-                *ngIf="order.orderStatus === 'PLACED'" 
-                class="btn-review"
-                routerLink="/customer/review/{{order.id}}">
-                Hủy 
-              </button>
-            </div>
+            <span class="status-badge" [ngClass]="getStatusClass(order.orderStatus)">
+              {{ getStatusLabel(order.orderStatus) }}
+            </span>
           </td>
-          <td>{{order.trackingId}}</td>
+          <td class="action-buttons">
+            <button *ngIf="order.orderStatus === 'PLACED'" class="status-change-btn"
+                    (click)="changeOrderStatus(order.id, 'CANCELLED')">
+              Hủy
+            </button>
+            <button *ngIf="order.orderStatus === 'DELIVERED'" class="status-change-btn"
+                    [routerLink]="'/customer/review/' + order.id">
+              Đánh giá
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <ng-template #noOrders>
+    <p class="empty-state">Không có đơn hàng nào ở trạng thái này.</p>
+  </ng-template>
 </div>

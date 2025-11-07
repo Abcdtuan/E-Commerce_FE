@@ -2,19 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CustomerService } from '../../service/customer.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ReviewComponent } from '../../review/review.component';
 import { AdminRoutingModule } from "../../../admin/admin-routing.module";
-
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, AdminRoutingModule, ReviewComponent],
+  imports: [CommonModule, AdminRoutingModule,MatTabsModule, MatButtonModule],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
 export class OrdersComponent {
 
   orders: any[] = [];
+  selectedTab: number = 0; 
+  statusMap: string[] = ['PLACED', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
 
   constructor(private customerService: CustomerService,
               private dialog: MatDialog
@@ -49,12 +51,26 @@ export class OrdersComponent {
       currency: 'VND'
     }).format(amount);
   }
+  filteredOrders() {
+    const status = this.statusMap[this.selectedTab];
+    return this.orders.filter(o => o.orderStatus === status);
+  }
 
   getAllOrders() {
     this.customerService.getOrdersByUserId().subscribe(res => {
       console.log(res)
       this.orders = res;
     })
+  }
+  changeOrderStatus(orderId: number, newStatus: string) {
+    this.customerService.changeOrderStatus(orderId, newStatus).subscribe({
+      next: (res) => {
+        this.getAllOrders();
+      },
+      error: (err) => {
+        console.error('Lỗi khi cập nhật trạng thái đơn hàng:', err);
+      }
+    });
   }
   
 

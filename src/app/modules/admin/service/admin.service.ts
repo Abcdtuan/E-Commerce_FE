@@ -142,6 +142,17 @@ export class AdminService {
       headers: this.createAuthorizationHeader(),
     })
   }
+  createBrand(brandDto: any): Observable<any>{
+    return this.http.post(BASIC_URL + "/api/admin/brand", brandDto,{
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
+  getBrandByCategoryId(categoryId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `/api/admin/brand/category/${categoryId}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
 
 
   private createAuthorizationHeader(): HttpHeaders {

@@ -12,39 +12,22 @@
 .container::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.95);
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(255,255,255,0.95);
   border-radius: 12px;
   z-index: 1;
 }
 
-.container > * {
-  position: relative;
-  z-index: 2;
-}
+.container > * { position: relative; z-index: 2; }
 
-/* Đảm bảo form sử dụng toàn bộ chiều rộng */
-form {
-  width: 100%;
-}
-
-.file-upload-container {
-  width: 100%;
-}
-
-.container h2 {
+h2 {
   text-align: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 20px;
   font-size: 20px;
   font-weight: 700;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .file-upload-container {
@@ -53,6 +36,7 @@ form {
   gap: 15px;
 }
 
+/* File Upload */
 .file-upload-label {
   display: flex;
   align-items: center;
@@ -71,33 +55,11 @@ form {
   overflow: hidden;
 }
 
-.file-upload-label::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s;
-}
-
-.file-upload-label:hover::before {
-  left: 100%;
-}
-
 .file-upload-label:hover {
   border-color: #5a67d8;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.file-upload-label mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
 }
 
 .image-preview-container {
@@ -107,92 +69,196 @@ form {
 }
 
 .circle-image {
-  width: 100px;
+  width: 100px; 
   height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  border: 3px solid #667eea;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
 }
 
 .circle-image img {
-  width: 100%;
+  width: 100%; 
   height: 100%;
   object-fit: cover;
 }
 
-.form-field {
+/* Form Fields */
+.form-field { 
+  width: 100%; 
+  margin-bottom: 12px; 
+}
+
+.mat-form-field { 
+  width: 100%; 
+  display: block; 
+}
+
+.mat-input-element { 
+  width: 100%; 
+}
+
+/* Form Row - Xuất xứ và Số lượng trên cùng 1 hàng */
+.form-row {
+  display: flex;
+  gap: 12px;
   width: 100%;
-  margin-bottom: 12px;
+
+  .mat-form-field {
+    flex: 1;
+    margin-bottom: 12px;
+  }
 }
 
-/* Đảm bảo Angular Material form fields có chiều rộng đầy đủ */
-.mat-form-field {
-  width: 100%;
-  display: block;
-}
-
-.mat-form-field-infix {
-  width: 100%;
-  min-width: 0;
-}
-
-.mat-input-element {
-  width: 100%;
-}
-
-.form-field mat-label {
-  color: #333;
-  font-weight: 500;
-}
-
-.form-field input,
+/* Textarea Description - Làm to hơn */
 .form-field textarea {
-  font-size: 14px;
-  padding: 10px;
-}
-
-.form-field textarea {
-  min-height: 70px;
+  min-height: 150px;
+  max-height: 400px;
   resize: vertical;
-}
-
-.form-field mat-error {
-  font-size: 12px;
-  color: #f44336;
-  margin-top: 4px;
-}
-
-/* Styling cho Angular Material Select */
-.mat-select-panel {
-  max-height: 200px;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e7ff;
-}
-
-.mat-option {
-  padding: 12px 16px;
+  line-height: 1.6;
+  padding: 12px;
   font-size: 14px;
-  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.mat-option:hover {
-  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
-  color: #667eea;
+mat-form-field:has(textarea) {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+  
+  textarea {
+    min-height: 150px;
+    max-height: 400px;
+    resize: vertical;
+  }
 }
 
-.mat-option.mat-selected {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+/* Category Select + Add Button */
+.category-select-field .select-with-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.mat-option.mat-selected:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+.category-select-field mat-select { 
+  flex: 1; 
 }
 
-/* Submit button */
+.category-select-field button { 
+  margin: 0; 
+  height: 36px; 
+  width: 36px; 
+}
+
+/* Category Form Overlay */
+.category-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.category-dialog {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+
+  h3 {
+    margin: 0;
+    color: #667eea;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .close-button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      color: #333;
+      background: #f0f0f0;
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+/* Category Dialog Textarea */
+.category-dialog .form-field textarea {
+  min-height: 100px;
+  max-height: 200px;
+}
+
+.category-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+
+  button {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+
+  button[color="primary"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    }
+  }
+
+  button[mat-button] {
+    color: #666;
+    
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+}
+
+/* Submit Button */
 button[type="submit"] {
   width: 100%;
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: 15px;
   font-weight: 600;
   margin-top: 15px;
@@ -201,149 +267,179 @@ button[type="submit"] {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   cursor: pointer;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-}
-
-button[type="submit"]::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s;
-}
-
-button[type="submit"]:hover::before {
-  left: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 button[type="submit"]:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 12px 35px rgba(102,126,234,0.4);
   background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
 }
 
 button[type="submit"]:active {
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(102,126,234,0.3);
 }
 
-/* Responsive design */
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input Focus Effects */
+.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #667eea;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #667eea;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: #667eea;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar Styling */
+.category-dialog::-webkit-scrollbar {
+  width: 6px;
+}
+
+.category-dialog::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.category-dialog::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 10px;
+}
+
+.category-dialog::-webkit-scrollbar-thumb:hover {
+  background: #5a67d8;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .container {
+  .container { 
+    margin: 10px; 
+    padding: 12px; 
+  }
+  
+  h2 { 
+    font-size: 18px; 
+    margin-bottom: 15px; 
+  }
+  
+  .circle-image { 
+    width: 80px; 
+    height: 80px; 
+  }
+  
+  .category-dialog {
+    width: 95%;
     margin: 10px;
-    padding: 12px;
+    padding: 20px;
   }
   
-  .container h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
+  /* Stack form-row trên mobile */
+  .form-row {
+    flex-direction: column;
+    gap: 0;
   }
-  
+
+  /* Giảm kích thước textarea trên mobile */
+  .form-field textarea {
+    min-height: 120px;
+    max-height: 300px;
+  }
+
+  .category-dialog .form-field textarea {
+    min-height: 80px;
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  h2 {
+    font-size: 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
   .file-upload-label {
     padding: 10px 14px;
     font-size: 13px;
   }
-  
-  .circle-image {
-    width: 80px;
-    height: 80px;
+
+  .circle-image { 
+    width: 70px; 
+    height: 70px; 
   }
-  
-  .form-field {
-    margin-bottom: 10px;
+
+  button[type="submit"] {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .category-dialog {
+    padding: 15px;
+  }
+
+  .dialog-header h3 {
+    font-size: 16px;
+  }
+
+  .category-buttons button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  /* Textarea nhỏ hơn trên mobile nhỏ */
+  .form-field textarea {
+    min-height: 100px;
+    max-height: 250px;
+    font-size: 13px;
   }
 }
 
-/* Custom styling cho Angular Material form fields */
-.mat-form-field-outline {
-  border-radius: 12px;
-  border-color: #e0e7ff !important;
-}
+@media (max-width: 360px) {
+  .container {
+    margin: 5px;
+    padding: 8px;
+  }
 
-.mat-form-field-outline-start,
-.mat-form-field-outline-end {
-  border-radius: 12px;
-}
+  .circle-image { 
+    width: 60px; 
+    height: 60px; 
+  }
 
-.mat-form-field-outline-thick {
-  color: #667eea !important;
-  border-color: #667eea !important;
-}
-
-.mat-form-field-label {
-  color: #667eea !important;
-}
-
-.mat-form-field-label.mat-focused {
-  color: #667eea !important;
-}
-
-.mat-form-field-ripple {
-  background-color: #667eea !important;
-}
-
-.mat-form-field.mat-focused .mat-form-field-outline-thick {
-  border-color: #667eea !important;
-}
-
-.mat-select-arrow {
-  color: #667eea !important;
-}
-
-.mat-form-field-appearance-outline .mat-form-field-outline {
-  background-color: rgba(248, 249, 255, 0.5);
-  transition: all 0.3s ease;
-}
-
-.mat-form-field-appearance-outline:hover .mat-form-field-outline {
-  background-color: rgba(248, 249, 255, 0.8);
-}
-
-/* Animation cho hover effects */
-.form-field {
-  transition: all 0.3s ease;
-}
-
-.form-field:hover {
-  transform: translateY(-1px);
-}
-
-/* Loading state (optional) */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #667eea;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-/* Thêm hiệu ứng pulse cho form */
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
-}
-
-.form-field.mat-form-field-invalid {
-  animation: pulse 1.5s infinite;
+  .form-field textarea {
+    min-height: 90px;
+    font-size: 12px;
+  }
 }

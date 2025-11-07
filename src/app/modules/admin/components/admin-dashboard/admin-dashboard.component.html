@@ -56,9 +56,9 @@
 
                 <mat-card-actions class="product-actions">
                     <button mat-raised-button class="action-btn btn-faq"
-                            [routerLink]="'admin/faq' + '/' + product.id">
+                            routerLink="/admin/product-detail/{{ product.id }}">
                         <mat-icon>help_outline</mat-icon>
-                        FAQ
+                        Chi tiêt
                     </button>
                     <button mat-raised-button class="action-btn btn-update"
                             routerLink="/admin/update-product/{{ product.id }}">
@@ -88,3 +88,4 @@
         </button>
     </div>
 </div>
+<app-footer></app-footer>

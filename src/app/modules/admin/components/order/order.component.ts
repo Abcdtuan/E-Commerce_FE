@@ -5,16 +5,18 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [CommonModule, MatCardModule,MatTableModule,MatMenuModule],
+  imports: [CommonModule, MatCardModule,MatTableModule,MatMenuModule, MatTabsModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
 export class OrderComponent {
 
   orders: any[] = [];
+  selectedTab: number = 0;
 
   constructor(private adminService: AdminService,
     private snackBar: MatSnackBar
@@ -65,6 +67,15 @@ export class OrderComponent {
         this.getAllOrders();
       }
     })
+  }
+  filteredOrders() {
+    switch (this.selectedTab) {
+      case 0: return this.orders.filter(o => o.orderStatus === 'PLACED');
+      case 1: return this.orders.filter(o => o.orderStatus === 'SHIPPED');
+      case 2: return this.orders.filter(o => o.orderStatus === 'DELIVERED');
+      case 3: return this.orders.filter(o => o.orderStatus === 'CANCELLED');
+      default: return this.orders;
+    }
   }
  
 }

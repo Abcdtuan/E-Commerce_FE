@@ -1,3 +1,25 @@
+<div class="main-container">
+  <div class="filter-sidebar">
+    <h3 class="filter-title">Thương hiệu</h3>
+    <mat-radio-group class="brand-filter-group" (change)="filterByBrand($event.value)">
+      <mat-radio-button class="brand-option" [value]="null">Tất cả</mat-radio-button>
+      <mat-radio-button
+        class="brand-option"
+        *ngFor="let brand of brands"
+        [value]="brand.id">
+        {{ brand.name }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <h3 class="filter-title">Sắp xếp theo giá</h3>
+    <mat-form-field appearance="fill" class="price-sort-select">
+      <mat-label>Chọn thứ tự</mat-label>
+      <mat-select [(value)]="sortOrder" (selectionChange)="sortProducts()">
+        <mat-option value="asc">Giá tăng dần</mat-option>
+        <mat-option value="desc">Giá giảm dần</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
 <div class="product-list-container">
     <div class="products-grid">
         <mat-card class="product-card" *ngFor="let product of products">

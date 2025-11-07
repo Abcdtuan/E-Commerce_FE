@@ -28,13 +28,18 @@ export class PostProductComponent {
 
   categoryForm!: FormGroup;
 
-  listOfCategories: any = [];
+  brandForm!: FormGroup;
 
+  listOfCategories: any = [];
+ 
+  listOfBrands: any = [];
   selectedFiles: File[] = [];
 
   imagePreviews: (string | ArrayBuffer | null)[] = [];
 
   showCategoryForm: boolean = false;
+
+  showBrandForm: boolean = false;
 
 
   
@@ -73,13 +78,21 @@ export class PostProductComponent {
       categoryId: [null, [Validators.required]],
       name: [null,[Validators.required]],
       description: [null, [Validators.required]],
-      price: [null, [Validators.required, Validators.min(0)]]
+      price: [null, [Validators.required, Validators.min(0)]],
+      origin:[null, [Validators.required]],
+      brandId: [null, [Validators.required]],
+      stockQuantity: [0, [Validators.required, Validators.min(0)]]
     })
     this.categoryForm = this.fb.group({
       name: [null, [Validators.required]],
       description: [null, [Validators.required]]
     })
+    this.brandForm = this.fb.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]]
+    });
     this.getAllCategorys();
+    
     
   }
   getAllCategorys(){
@@ -100,6 +113,10 @@ export class PostProductComponent {
       formData.append('description', this.productForm.get('description')?.value);
       formData.append('price', this.productForm.get('price')?.value);
       formData.append('categoryId', this.productForm.get('categoryId')?.value);
+      formData.append('brandId', this.productForm.get('brandId')?.value);
+      formData.append('origin', this.productForm.get('origin')?.value);
+      formData.append('stockQuantity', this.productForm.get('stockQuantity')?.value);
+      
 
       this.adminService.addProduct(formData).subscribe({
         next: (res) => {
@@ -134,4 +151,41 @@ export class PostProductComponent {
       })
     }
   }
+  onCategoryChange(categoryId: number): void {
+    if (!categoryId) {
+      this.listOfBrands = [];
+      this.productForm.patchValue({ brandId: null });
+      return;
+    }
+    this.getBrandByCategory(categoryId);
+  }
+
+  getBrandByCategory(categoryId: number) {
+    if (!categoryId) {
+      this.listOfBrands = [];
+      return;
+    }
+    this.adminService.getBrandByCategoryId(categoryId).subscribe(res => this.listOfBrands = res);
+  }
+
+  createBrand() {
+    const categoryId = this.productForm.get('categoryId')?.value;
+    if (!categoryId) {
+      this.snackbar.open("Vui lòng chọn danh mục trước khi thêm brand", "Close", { duration: 3000 });
+      return;
+    }
+
+    if (this.brandForm.valid) {
+      const payload = { ...this.brandForm.value, categoryId };
+      this.adminService.createBrand(payload).subscribe(res => {
+        if (res != null) {
+          this.snackbar.open("Brand Created Successfully", "Close", { duration: 3000 });
+          this.getBrandByCategory(categoryId);
+          this.showBrandForm = false;
+          this.brandForm.reset();
+        }
+      });
+    }
+  }
+
 }

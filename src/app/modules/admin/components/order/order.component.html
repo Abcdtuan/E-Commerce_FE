@@ -3,6 +3,13 @@
     <h2>Danh sách Order</h2>
   </div>
 
+  <mat-tab-group [(selectedIndex)]="selectedTab">
+    <mat-tab label="Đã đặt"></mat-tab>
+    <mat-tab label="Đang giao"></mat-tab>
+    <mat-tab label="Đã giao"></mat-tab>
+    <mat-tab label="Đã hủy"></mat-tab>
+  </mat-tab-group>
+
   <div class="table-wrapper">
     <table class="order-table">
       <thead>
@@ -18,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
+        <tr *ngFor="let order of filteredOrders()">
           <td>{{order.id}}</td>
           <td>{{order.userName || 'N/A'}}</td>
           <td class="bold-cell">{{formatCurrency(order.amount)}}</td>
@@ -31,32 +38,15 @@
             </span>
           </td>
           <td>
-            <button
-              class="status-change-btn"
-              [matMenuTriggerFor]="menu"
-            >
-              Thay đổi
-            </button>
+            <button class="status-change-btn" [matMenuTriggerFor]="menu">Thay đổi</button>
             <mat-menu #menu="matMenu" class="status-menu">
-              <button
-                mat-menu-item
-                class="menu-item-shipped"
-                (click)="changeOrderStatus(order.id, 'Shipped')"
-              >
+              <button mat-menu-item class="menu-item-shipped" (click)="changeOrderStatus(order.id, 'Shipped')">
                 Đã gửi hàng
               </button>
-              <button
-                mat-menu-item
-                class="menu-item-delivered"
-                (click)="changeOrderStatus(order.id, 'Delivered')"
-              >
+              <button mat-menu-item class="menu-item-delivered" (click)="changeOrderStatus(order.id, 'Delivered')">
                 Đã giao hàng
               </button>
-              <button
-                mat-menu-item
-                class="menu-item-cancelled"
-                (click)="changeOrderStatus(order.id, 'Cancelled')"
-              >
+              <button mat-menu-item class="menu-item-cancelled" (click)="changeOrderStatus(order.id, 'Cancelled')">
                 Đã hủy
               </button>
             </mat-menu>

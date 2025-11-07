@@ -14,13 +14,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from '../../service/customer.service';
 import { FooterComponent } from '../footer/footer.component';
 import { AdvertisementComponent } from '../advertisement/advertisement.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule, FooterComponent, AdvertisementComponent, RouterModule],
+  imports: [MatCardModule, CommonModule, MatDividerModule, MatButtonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatChipsModule, FooterComponent, AdvertisementComponent, RouterModule, MatOptionModule, MatSelectModule],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.scss'
 })
@@ -31,6 +33,7 @@ export class CustomerDashboardComponent {
   totalPages: number = 0;
   products: any[] = [];
   searchProducts!: FormGroup;
+  sortOrder: 'asc' | 'desc' = 'asc';
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar,
               private customerService: CustomerService) { }
@@ -58,8 +61,23 @@ export class CustomerDashboardComponent {
 
       this.products.push(product);
     });
+    if (this.page >= 1) {
+        this.sortProducts();
+    }
   });
   }
+  sortProducts() {
+    this.products.sort((a, b) => this.sortOrder === 'asc' ? a.price - b.price : b.price - a.price);
+  }
+
+  
+  changeSort(order: 'asc' | 'desc') {
+    this.sortOrder = order;
+    if (this.page >= 1) {
+      this.sortProducts();
+    }
+  }
+
   nextPage() {
     if (this.page < this.totalPages - 1) {
       this.page++;

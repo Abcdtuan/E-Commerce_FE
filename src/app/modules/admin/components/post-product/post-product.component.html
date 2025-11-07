@@ -18,9 +18,12 @@
 
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Danh mục</mat-label>
-                <mat-select formControlName="categoryId" name="categoryId">
+                <mat-select 
+                    formControlName="categoryId" 
+                    name="categoryId"
+                    (selectionChange)="onCategoryChange($event.value)">
                     <mat-option *ngFor="let category of listOfCategories" [value]="category.id">
-                        {{ category.name }}
+                    {{ category.name }}
                     </mat-option>
                 </mat-select>
                 <mat-error *ngIf="productForm.get('categoryId')?.hasError('required')">
@@ -30,6 +33,7 @@
                     <mat-icon>add</mat-icon>
                 </button>
             </mat-form-field>
+
  
         <div *ngIf="showCategoryForm" class="category-overlay">
             <form [formGroup]="categoryForm">
@@ -61,6 +65,50 @@
             </form>
         </div>
 
+            <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Thương hiệu</mat-label>
+            <mat-select formControlName="brandId">
+                <mat-option *ngFor="let brand of listOfBrands" [value]="brand.id">
+                {{ brand.name }}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="productForm.get('brandId')?.hasError('required')">
+                Thương hiệu là bắt buộc
+            </mat-error>
+            <button mat-button color="accent" type="button" (click)="showBrandForm = true">
+                <mat-icon>add</mat-icon>
+            </button>
+            </mat-form-field>
+
+            
+            <div *ngIf="showBrandForm" class="overlay">
+                <form [formGroup]="brandForm">
+                    <div class="dialog">
+                    <div class="dialog-header">
+                        <h3>Thêm thương hiệu</h3>
+                        <button class="close-button" (click)="showBrandForm = false">
+                        <mat-icon>close</mat-icon>
+                        </button>
+                    </div>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Tên thương hiệu</mat-label>
+                        <input matInput type="text" formControlName="name" placeholder="Nhập tên brand" />
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>Mô tả</mat-label>
+                        <textarea matInput formControlName="description" placeholder="Mô tả"></textarea>
+                    </mat-form-field>
+
+                    <div class="dialog-buttons">
+                        <button mat-raised-button color="primary" type="button" (click)="createBrand()">Lưu</button>
+                        <button mat-button type="button" (click)="showBrandForm = false">Hủy</button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+
 
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Tên </mat-label>
@@ -77,6 +125,25 @@
                     Giá sản phẩm là bắt buộc.
                 </mat-error>
             </mat-form-field>
+            
+            <div class="form-row">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Xuất xứ</mat-label>
+                    <input matInput type="text" formControlName="origin" placeholder="Nhập xuất xứ" />
+                    <mat-error *ngIf="productForm.get('origin')?.hasError('required')">
+                        Xuất xứ là bắt buộc.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Số lượng tồn kho</mat-label>
+                    <input matInput type="number" formControlName="stockQuantity" placeholder="Nhập số lượng" min="0"/>
+                    <mat-error *ngIf="productForm.get('stockQuantity')?.hasError('required')">
+                        Số lượng là bắt buộc.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
 
             <mat-form-field appearance="outline" class="form-field">
                 <mat-label>Mô tả</mat-label>

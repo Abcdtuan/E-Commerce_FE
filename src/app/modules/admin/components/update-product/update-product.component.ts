@@ -9,13 +9,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { switchMap, tap, map } from 'rxjs/operators';
+import { MatLabel } from '@angular/material/form-field';
+
+
 
 @Component({
   selector: 'app-update-product',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatOption, CommonModule, ReactiveFormsModule, MatIcon],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatOption, CommonModule, ReactiveFormsModule, MatIconModule, MatButtonModule, MatLabel],
   templateUrl: './update-product.component.html',
   styleUrl: './update-product.component.scss'
 })
@@ -31,6 +36,12 @@ export class UpdateProductComponent {
     productId!: number;
 
     existingImg: string []  | null = null;
+
+    brandForm!: FormGroup;
+
+    listOfBrands: any = [];
+
+    showBrandForm: boolean = false;
 
     
   
@@ -48,8 +59,16 @@ export class UpdateProductComponent {
         categoryId: [null, [Validators.required]],
         name: [null,[Validators.required]],
         description: [null, [Validators.required]],
-        price: [null, [Validators.required, Validators.min(0)]]
+        price: [null, [Validators.required, Validators.min(0)]],
+        origin:[null, [Validators.required]],
+        brandId: [null, [Validators.required]],
+        stockQuantity: [0, [Validators.required, Validators.min(0)]]
+
       })
+      this.brandForm = this.fb.group({
+        name: [null, [Validators.required]],
+        description: [null, [Validators.required]]
+      });
       this.getAllCategorys();
        this.getProductById();
     }
@@ -60,18 +79,30 @@ export class UpdateProductComponent {
         },
       })
     }
-    getProductById(){
-      this.adminService.getProductById(this.productId).subscribe({
-       next: (res) =>{
-          this.productForm.patchValue(res)
-          this.existingImg = res.byteImages.map((imgByte: string) => 
-             'data:image/jpeg;base64,' + imgByte
-          )
-          console.log(res)
-       }
-       
-      })
+    getProductById() {
+      this.adminService.getProductById(this.productId).pipe(
+        switchMap(res => {
+          this.existingImg = res.byteImages?.map((imgByte: string) =>
+            'data:image/jpeg;base64,' + imgByte
+          ) || [];
+          return this.adminService.getBrandByCategoryId(res.categoryId).pipe(
+            tap(brands => this.listOfBrands = brands),
+            map(() => res)
+          );
+        })
+      ).subscribe(res => {
+        this.productForm.patchValue({
+          categoryId: res.categoryId,
+          brandId: res.brandId,
+          name: res.name,
+          description: res.description,
+          price: res.price,
+          origin: res.origin,
+          stockQuantity: res.stockQuantity
+        });
+      });
     }
+
     onFileSelected(event: any) {
       this.selectedFiles = Array.from(event.target.files);
       this.imagePreview = [];
@@ -95,6 +126,9 @@ export class UpdateProductComponent {
         formData.append('description', this.productForm.get('description')?.value);
         formData.append('price', this.productForm.get('price')?.value);
         formData.append('categoryId', this.productForm.get('categoryId')?.value);
+        formData.append('brandId', this.productForm.get('brandId')?.value);
+        formData.append('origin', this.productForm.get('origin')?.value);
+        formData.append('stockQuantity', this.productForm.get('stockQuantity')?.value);
 
         this.adminService.updateProduct(this.productId,formData).subscribe({
           next: (res) => {
@@ -112,6 +146,46 @@ export class UpdateProductComponent {
           this.productForm.controls[i].updateValueAndValidity();
         }
       }
+  }
+    onCategoryChange(categoryId: number): void {
+    if (!categoryId) {
+      this.listOfBrands = [];
+      this.productForm.patchValue({ brandId: null });
+      return;
+    }
+    this.getBrandByCategory(categoryId);
+  }
+
+ getBrandByCategory(categoryId: number, callback?: () => void) {
+  if (!categoryId) {
+    this.listOfBrands = [];
+    if (callback) callback();
+    return;
+  }
+  this.adminService.getBrandByCategoryId(categoryId).subscribe(res => {
+    this.listOfBrands = res;
+    if (callback) callback();
+  });
+}
+
+  createBrand() {
+    const categoryId = this.productForm.get('categoryId')?.value;
+    if (!categoryId) {
+      this.snackbar.open("Vui lòng chọn danh mục trước khi thêm brand", "Close", { duration: 3000 });
+      return;
+    }
+
+    if (this.brandForm.valid) {
+      const payload = { ...this.brandForm.value, categoryId };
+      this.adminService.createBrand(payload).subscribe(res => {
+        if (res != null) {
+          this.snackbar.open("Brand Created Successfully", "Close", { duration: 3000 });
+          this.getBrandByCategory(categoryId);
+          this.showBrandForm = false;
+          this.brandForm.reset();
+        }
+      });
+    }
   } 
 }
        

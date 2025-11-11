@@ -19,13 +19,21 @@
         <button mat-menu-item [routerLink]="['/admin/analytics-products']">
           Thống kê chi tiết
         </button>
+        <button mat-menu-item [routerLink]="['/admin/payments']">
+          Thống kê thanh toán
+        </button>
+
       </mat-menu>
     <button mat-button routerLink="/admin/product" routerLinkActive="active">Thêm sản phẩm</button>
     <button mat-button routerLink="/admin/orders" routerLinkActive="active">Đơn hàng</button>
     <button mat-button routerLink="/admin/category" routerLinkActive="active">Quản lý danh mục</button>
-    <button mat-button routerLink="/admin/post-coupon" routerLinkActive="active">thêm mã giảm giá</button>
-    <button mat-button routerLink="/admin/coupons" routerLinkActive="active">Quản lý mã giảm giá</button>
+    <button mat-button [matMenuTriggerFor]="couponMenu">Mã giảm giá</button>
+      <mat-menu #couponMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/admin/coupons']">Quản lý mã giảm giá</button>
+        <button mat-menu-item [routerLink]="['/admin/post-coupon']">Thêm mã giảm giá</button>
+      </mat-menu>
     <button mat-button routerLink="/admin/users" routerLinkActive="active">Quản lý người dùng</button>
+    
     
     <button mat-button routerLinkActive="active" (click)="logOut()">Đăng xuất</button>
   </mat-toolbar>

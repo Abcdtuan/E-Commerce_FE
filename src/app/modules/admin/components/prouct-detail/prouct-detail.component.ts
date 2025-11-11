@@ -21,29 +21,30 @@ import { CustomerService } from '../../../customer/service/customer.service';
 })
 export class ProuctDetailComponent {
 
-    productId!: number;
+     productId!: number;
+  product: any;
 
-    product: any;
+  reviewList: any[] = []
+  currentImageIndex: number = 0;
 
-    reviewList: any[] = []
-    currentImageIndex: number = 0;
+  existingImg: string  | null = null;
 
-    existingImg: string  | null = null;
 
-    constructor(private  adminService: AdminService,
-        private customerService: CustomerService,
-        private activatedRoute: ActivatedRoute,
-        private snackBar: MatSnackBar
-      ) { 
-        this.productId = this.activatedRoute.snapshot.params['productId'];
-    }
-    ngOnInit(): void {
+
+  constructor(private customerService: CustomerService,
+    private activatedRoute: ActivatedRoute,
+    private snackBar: MatSnackBar
+  ) { 
+    this.productId = this.activatedRoute.snapshot.params['productId'];
+  }
+
+  ngOnInit(): void {
     this.productDetails();
     this.getAllReviewsByProductId();
   }
 
   productDetails(){
-    this.adminService.getProductById(this.productId).subscribe(res=>{
+    this.customerService.getProductById(this.productId).subscribe(res=>{
       const images = res.byteImages.map((imgByte: string) => ({
         processedImg: 'data:image/jpeg;base64,' + imgByte
       }))
@@ -63,7 +64,7 @@ export class ProuctDetailComponent {
   prevImage() {
     if (!this.product || !this.product.images) return;
     this.currentImageIndex = (this.currentImageIndex - 1 + this.product.images.length) % this.product.images.length;
-  } 
+  }
   getAllReviewsByProductId() {
     this.customerService.getReviewByProductId(this.productId).subscribe((res: any[]) => {
       console.log('Review response:', res); 
@@ -82,5 +83,6 @@ export class ProuctDetailComponent {
   getStarArray(rating: number): boolean[] {
     return Array(5).fill(false).map((_, index) => index < rating);
   }
+  
 
 }

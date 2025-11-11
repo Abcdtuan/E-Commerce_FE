@@ -154,6 +154,17 @@ export class AdminService {
     });
   }
 
+  getAllPayments(): Observable<any>{
+    return this.http.get(BASIC_URL + "/api/admin/payments",{
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+  refundPayment(paymentRefundDto: any): Observable<any>{
+    return this.http.put(BASIC_URL + "/api/admin/payment/refund", paymentRefundDto,{
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
 
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(

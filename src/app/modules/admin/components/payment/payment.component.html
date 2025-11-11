@@ -1,0 +1,65 @@
+<div class="category-container">
+  <div class="header">
+    <h2>Danh sách đơn hàng thanh toán</h2>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>OrderId</th>
+          <th>Số tiền</th>
+          <th>Phương thức thanh toán</th>
+          <th>Số tiền nhận</th>
+          <th>Số tiền hoàn</th>
+          <th>Lý do</th>
+          <th>Ngày tạo</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of payments">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.orderId }}</td>
+          <td>{{ payment.amount | number:'1.0-0' }} ₫</td>
+          <td><span class="payment-method">{{ payment.paymentMethod }}</span></td>
+          <td>{{ payment.amountPaid | number:'1.0-0' }} ₫</td>
+          <td>{{ payment.amountRefunded | number:'1.0-0' }} ₫</td>
+          <td>{{ payment.refundReason || '-' }}</td>
+          <td>{{ payment.refundDate | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <button class="btn-refund" (click)="openRefund(payment)">Thanh toán</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="refund-form" *ngIf="showUpdate">
+    <h3>Hoàn tiền cho giao dịch #{{ selectedPaymentId }}</h3>
+
+    <form [formGroup]="paymentForm" (ngSubmit)="updatePayment()">
+      
+      <div class="form-group">
+        <label>Số tiền đã thanh toán</label>
+        <input type="number" formControlName="amountPaid" >
+      </div>
+
+      <div class="form-group">
+        <label>Số tiền hoàn</label>
+        <input type="number" formControlName="amountRefunded">
+      </div>
+
+      <div class="form-group">
+        <label>Lý do hoàn</label>
+        <input type="text" formControlName="refundReason">
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn-confirm">Xác nhận</button>
+        <button type="button" class="btn-cancel" (click)="close()">Hủy</button>
+      </div>
+    </form>
+  </div>
+  
+</div>

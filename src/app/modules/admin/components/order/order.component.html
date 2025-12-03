@@ -1,8 +1,19 @@
 <div class="order-container">
   <div class="header">
     <h2>Danh sách Order</h2>
+    <div class="search-section">
+      <form [formGroup]="searchOrders" (ngSubmit)="submitSearch()" class="search-form">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Tìm kiếm theo tên</mat-label>
+          <input matInput formControlName="name" placeholder="Nhập tên khách hàng" />
+          <button mat-icon-button matSuffix type="submit">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </div>
   </div>
-
+   
   <mat-tab-group [(selectedIndex)]="selectedTab">
     <mat-tab label="Đã đặt"></mat-tab>
     <mat-tab label="Đang giao"></mat-tab>

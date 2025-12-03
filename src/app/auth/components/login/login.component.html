@@ -7,12 +7,12 @@
                     <mat-label>Email</mat-label>
                     <input matInput formControlName="email" [placeholder]="'Enter your email'" required />
                     <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-                        Please enter a valid email.
+                        Vui lòng nhập email.
                     </mat-error>
                 </mat-form-field>
 
                <mat-form-field appearance="outline" floatLabel="auto">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Mật khẩu</mat-label>
                     <input
                         matInput
                         [type]="hidePassword ? 'password' : 'text'"
@@ -23,16 +23,16 @@
                         <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                     </button>
                     <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-                        Please enter a valid password.
+                        Vui lòng nhập mật khẩu.
                     </mat-error>
                 </mat-form-field>
                 <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-                    Login
+                    Đăng nhập
                 </button>
             </form>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button color="accent" routerLink="/sign-up"> Don't have an account? Sign Up</button>
+            <button mat-button color="accent" routerLink="/sign-up"> Đăng ký</button>
         </mat-card-actions>
         <mat-card-actions>
             <button mat-button color="accent" routerLink="/forgot-password"> Quên mật khẩu</button>

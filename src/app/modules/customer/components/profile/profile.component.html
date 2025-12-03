@@ -1,16 +1,30 @@
 <div class="profile-container">
   <h2>Hồ Sơ Của Tôi</h2>
   <p class="subtitle">Quản lý thông tin hồ sơ để bảo mật tài khoản</p>
-  
-  <div class="profile-form">
 
+  <form [formGroup]="updateForm" class="profile-form">
+
+    
+    <div class="form-group avatar">
+      <label>Ảnh đại diện</label>
+      <div class="avatar-wrapper">
+        <img *ngIf="imagePreview; else defaultIcon" class="avatar-preview" [src]="imagePreview" alt="avatar">
+        <ng-template #defaultIcon>
+          <mat-icon>account_circle</mat-icon>
+        </ng-template>
+      </div>
+      <input type="file" (change)="onfilreSelected($event)">
+    </div>
+
+    
     <div class="form-group">
-      <label>Tên đăng nhập</label>
+      <label>Tên tài khoản</label>
       <div class="input-wrapper">
-        <input type="text" [value]="user?.name" disabled>
+        <input type="text" formControlName="name">
       </div>
     </div>
 
+    
     <div class="form-group">
       <label>Email</label>
       <div class="input-wrapper">
@@ -18,13 +32,30 @@
       </div>
     </div>
 
+    
     <div class="form-group">
-      <label></label>
+      <div class="input-wrapper">
+        <button
+          class="btn-update"
+          [class.active]="hasChanged()"
+          [disabled]="!hasChanged()"
+          (click)="updateProfile()"
+        >
+          Cập nhật
+        </button>
+      </div>
+    </div>
+
+    
+    <div class="form-group">
       <div class="input-wrapper">
         <button class="btn-change-password" (click)="changePassword()">
           Đổi Mật Khẩu
         </button>
       </div>
     </div>
-  </div>
+
+  </form>
 </div>
+
+<app-footer></app-footer>

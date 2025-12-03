@@ -22,6 +22,8 @@ export class AppComponent {
   title = 'ECommerceWeb';
 
   categories: any[] = [];
+  img: string | null = null;
+  imagePreview: string | ArrayBuffer | null = null;
   isCustomerLoggedIn: boolean = UserStorageService.isCustomerLoggedIn();
   isAdminLoggedIn: boolean = UserStorageService.isAdminLoggedIn();
 
@@ -31,6 +33,9 @@ export class AppComponent {
     this.route.events.subscribe(() => {
       this.isCustomerLoggedIn = UserStorageService.isCustomerLoggedIn();
       this.isAdminLoggedIn = UserStorageService.isAdminLoggedIn();
+       if (this.isCustomerLoggedIn) {
+       this.getProfile();
+    }
     })
     this.getAllCategories();
   }
@@ -43,6 +48,15 @@ export class AppComponent {
       }
     });
     
+  }
+  getProfile(){
+    this.customerService.getProfile().subscribe(res =>{
+      if (res.byteImg) { 
+          this.img = 'data:image/jpeg;base64,' + res.byteImg;
+        } else {
+          this.img = null;
+      }
+    })
   }
   logOut(){
     UserStorageService.signOut();

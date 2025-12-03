@@ -11,13 +11,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { PlaceOrderComponent } from '../../place-order/place-order.component';
+import { FooterComponent } from '../../footer/footer.component';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, MatIconModule, ReactiveFormsModule,  
-    MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,PlaceOrderComponent],
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatListModule,PlaceOrderComponent, FooterComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

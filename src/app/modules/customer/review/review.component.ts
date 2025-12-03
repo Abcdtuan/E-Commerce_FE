@@ -84,6 +84,7 @@ export class ReviewComponent {
     formData.append('description', reviewData.formData.description);
     formData.append('productId', productId.toString());
     formData.append('userId', UserStorageService.getUserId().toString());
+    formData.append('orderId', this.orderId.toString());
     
     this.customerService.giveReview(formData).subscribe({
       next: (res) => {

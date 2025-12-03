@@ -39,7 +39,7 @@
           </td>
           <td class="action-buttons">
             <button *ngIf="order.orderStatus === 'PLACED'" class="status-change-btn"
-                    (click)="changeOrderStatus(order.id, 'CANCELLED')">
+                    (click)="changeOrderStatus(order.id, 'Cancelled')">
               Hủy
             </button>
             <button *ngIf="order.orderStatus === 'DELIVERED'" class="status-change-btn"

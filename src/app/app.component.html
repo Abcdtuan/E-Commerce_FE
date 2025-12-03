@@ -50,15 +50,42 @@
         </button>
       </mat-menu>
     <button mat-button routerLink="/customer/orders" routerLinkActive="active">Đơn hàng</button>
-    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Hồ sơ</button>
-    <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">
-      <mat-icon style="font-size: 20px; line-height: 1;">favorite</mat-icon>
+     <button mat-button routerLink="/customer/wishlist" routerLinkActive="active"
+      style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+      <mat-icon style="font-size: 23px; width: 26px; height: 26px; line-height: 26px;">
+        favorite
+      </mat-icon>
     </button>
-    <button mat-button routerLink="/customer/cart" routerLinkActive="active">
-      <mat-icon style="font-size: 20px; line-height: 1;">shopping_cart</mat-icon>
+    <button mat-button routerLink="/customer/cart" routerLinkActive="active"
+      style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+      <mat-icon style="font-size: 23px; width: 26px; height: 26px; line-height: 26px;">
+        shopping_cart
+      </mat-icon>
     </button>
-    
-    <button mat-button routerLinkActive="active" (click)="logOut()">Đăng xuất</button>
+   <button mat-button [matMenuTriggerFor]="profileMenu"
+  style="min-width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; padding:0;">
+
+  <img *ngIf="img; else showIcon" [src]="img"
+       style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;" />
+
+      <ng-template #showIcon>
+        <mat-icon style="font-size: 26px; width: 26px; height: 26px; line-height: 26px; vertical-align: middle;">
+          account_circle
+        </mat-icon>
+      </ng-template>
+    </button>
+
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLink="/customer/profile">
+        <mat-icon>person</mat-icon>
+        <span>Hồ sơ</span>
+      </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        <span>Đăng xuất</span>
+      </button>
+    </mat-menu>
+
   </mat-toolbar>
 </div>
 

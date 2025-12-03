@@ -1,6 +1,17 @@
 <div class="category-container">
   <div class="header">
     <h2>Danh sách đơn hàng thanh toán</h2>
+    <div class="search-section">
+    <form [formGroup]="searchPaymentForm" (ngSubmit)="submitSearch()">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Tìm kiếm theo tên</mat-label>
+        <input matInput formControlName="name" placeholder="Nhập tên khách hàng" />
+        <button mat-icon-button matSuffix type="submit">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
   </div>
 
   <div class="table-wrapper">
@@ -9,6 +20,7 @@
         <tr>
           <th>ID</th>
           <th>OrderId</th>
+          <th>Tên</th>
           <th>Số tiền</th>
           <th>Phương thức thanh toán</th>
           <th>Số tiền nhận</th>
@@ -19,9 +31,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let payment of payments">
+        <tr *ngFor="let payment of filteredPayments">
           <td>{{ payment.id }}</td>
           <td>{{ payment.orderId }}</td>
+          <td>{{ payment.name }}</td>
           <td>{{ payment.amount | number:'1.0-0' }} ₫</td>
           <td><span class="payment-method">{{ payment.paymentMethod }}</span></td>
           <td>{{ payment.amountPaid | number:'1.0-0' }} ₫</td>

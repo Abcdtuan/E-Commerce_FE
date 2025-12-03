@@ -4,17 +4,23 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatIconModule, MatButtonModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.scss'
 })
 export class PaymentComponent {
 
   payments: any [] = [];
+  filteredPayments: any[] = [];
+  searchPaymentForm!: FormGroup;
   showUpdate = false;
   selectedPaymentId: number | null = null;
   paymentForm!: FormGroup;
@@ -25,6 +31,9 @@ export class PaymentComponent {
 
   }
   ngOnInit(): void{
+    this.searchPaymentForm = this.fb.group({
+      name: [null, [Validators.required]],
+    });
     this.paymentForm = this.fb.group({
       amountPaid: [null, [Validators.required]],
       amountRefunded: [null, [Validators.required]],
@@ -37,6 +46,7 @@ export class PaymentComponent {
     this.adminService.getAllPayments().subscribe(res=>{
       console.log(res);
       this.payments = res;
+      this.filteredPayments = res;
     })
   }
   openRefund(payment: any){
@@ -63,7 +73,15 @@ export class PaymentComponent {
       },
       error: () => this.snack.open('Có lỗi xảy ra', 'Đóng', { duration: 2000 })
     });
+    
   }
+  submitSearch() {
+    const name = this.searchPaymentForm.value.name?.toLowerCase() || '';
+    this.filteredPayments = this.payments.filter(p => 
+      (p.name || '').toLowerCase().includes(name)
+    );
+  }
+  
   
   
   

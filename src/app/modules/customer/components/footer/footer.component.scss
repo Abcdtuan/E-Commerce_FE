@@ -1,62 +1,89 @@
 .footer {
-  background-color: #0e0f0f; // màu xanh dương Bootstrap
-  color: white;
-  padding: 1.5rem 0;
-  margin-top: 2rem;
+  background-color: rgba(255,255,255,0.8);
+  color: #111;
+  padding: 30px 20px;
+  font-family: "Times New Roman", sans-serif;
+  margin-top: 40px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
 
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 30px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footer-left h3,
+.footer-center h3,
+.footer-right h3 {
+  color: #111;
+  font-size: 18px;
+  border-left: 3px solid #cccccc;
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+.footer-left .desc {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.footer-center a,
+.footer-right a {
+  display: block;
+  font-size: 14px;
+  margin: 8px 0;
+  color: #111;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-center a:hover,
+.footer-right a:hover {
+  color: #000;
+  transform: translateX(4px);
+}
+
+.footer-right p {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.footer-left .copyright {
+  margin: 15px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
   .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
   }
 
-  .footer-left {
-    h3 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    p {
-      margin: 0.25rem 0 0 0;
-      font-size: 0.9rem;
-    }
-
-    // Thêm phần này:
-    .contact-info {
-      margin-top: 0.5rem;
-
-      p {
-        margin: 0.2rem 0;
-        font-size: 0.85rem;
-
-        a {
-          color: #ffffff;
-          text-decoration: underline;
-
-          &:hover {
-            color: #d1ecff;
-          }
-        }
-      }
-    }
+  .footer-left h3,
+  .footer-center h3,
+  .footer-right h3 {
+    border-left: none;
+    border-bottom: 2px solid #cccccc;
+    padding-left: 0;
+    padding-bottom: 6px;
   }
 
-  .footer-right {
-    display: flex;
-    gap: 1rem;
-
-    a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  .footer-center a:hover,
+  .footer-right a:hover {
+    transform: none;
   }
 }

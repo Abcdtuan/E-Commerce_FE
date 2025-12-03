@@ -7,11 +7,13 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule,FormsModule,MatButtonModule,MatInputModule],
+  imports: [CommonModule, MatFormFieldModule,FormsModule,MatButtonModule,MatInputModule,MatCardModule,MatIconModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.scss'
 })
@@ -21,6 +23,7 @@ export class ForgotPasswordComponent {
   otp = '';
   newPassword = '';
   step = 1;
+  hidePassword = true;
 
   constructor(
     private authService: AuthService,
@@ -28,6 +31,9 @@ export class ForgotPasswordComponent {
     private router: Router
   ) {}
 
+  togglePasswordVisibility() {
+    this.hidePassword = !this.hidePassword;
+  }
   sendOtp() {
     this.authService.sendOtp(this.email).subscribe({
       next: (res) => {

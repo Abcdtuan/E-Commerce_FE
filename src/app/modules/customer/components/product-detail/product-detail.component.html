@@ -22,12 +22,12 @@
 
     <div class="product-stats">
       <div class="average-rating" *ngIf="product?.averageRating">
-        <span *ngFor="let star of getStarArray(product.averageRating)" 
+        <span *ngFor="let star of getStarArray(product?.averageRating)" 
               class="star" 
               [class.filled]="star">
           ★
         </span>
-        <span class="rating-number">{{ product.averageRating | number:'1.1-1' }}</span>
+        <span class="rating-number">{{ product?.averageRating | number:'1.1-1' }}</span>
       </div>
       <span class="separator" *ngIf="product.averageRating && product.totalSold">|</span>
       <div class="total-sold" *ngIf="product.totalSold">
@@ -86,7 +86,7 @@
     <div class="average-rating-summary" *ngIf="product.averageRating">
       <span class="rating-number-large">{{ product.averageRating | number:'1.1-1' }}</span>
       <div class="stars-large">
-        <span *ngFor="let star of getStarArray(product.averageRating)" 
+        <span *ngFor="let star of getStarArray(product?.averageRating)" 
               class="star" 
               [class.filled]="star">
           ★

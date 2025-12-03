@@ -149,6 +149,11 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     })
   }
+  updateProfile(formData: FormData): Observable<any>{
+    return this.http.put(BASIC_URL + '/api/customer/user/update', formData, {
+      headers: this.createAuthorizationheader()
+    })
+  }
   changePassword(userDto: any): Observable<any>{
     userDto.userId = UserStorageService.getUserId();
     return this.http.put(BASIC_URL + '/api/customer/user/changePassword', userDto, {
@@ -187,8 +192,8 @@ export class CustomerService {
       headers: this.createAuthorizationheader()
     });
   }
-
-
+  
+  
   private createAuthorizationheader(): HttpHeaders{
     return new HttpHeaders().set(
       'Authorization', 'Bearer ' + UserStorageService.getToken()

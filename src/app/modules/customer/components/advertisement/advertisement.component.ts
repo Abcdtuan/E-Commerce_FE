@@ -11,8 +11,8 @@ import { Component } from '@angular/core';
 export class AdvertisementComponent {
   images = [
     
-    { src: 'assets/Image3.webp', alt: 'Advertisement 2' },
-    { src: 'assets/Image2.webp', alt: 'Advertisement 2' },
+    { src: 'assets/1000z-launch-website-banner_1695177885.webp', alt: 'Advertisement 2' },
+    { src: 'assets/yonex-astrox-99_1757731351.webp', alt: 'Advertisement 2' },
     
 
   ];

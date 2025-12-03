@@ -5,10 +5,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdminRoutingModule } from "../../../admin/admin-routing.module";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule, AdminRoutingModule,MatTabsModule, MatButtonModule],
+  imports: [CommonModule, AdminRoutingModule,MatTabsModule, MatButtonModule,],
   templateUrl: './orders.component.html',
   styleUrl: './orders.component.scss'
 })
@@ -19,7 +22,9 @@ export class OrdersComponent {
   statusMap: string[] = ['PLACED', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
 
   constructor(private customerService: CustomerService,
-              private dialog: MatDialog
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private FormBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -66,12 +71,15 @@ export class OrdersComponent {
     this.customerService.changeOrderStatus(orderId, newStatus).subscribe({
       next: (res) => {
         this.getAllOrders();
+        this.snackBar.open('Cập nhật trạng thái đơn hàng thành công', 'Đóng', { duration: 2000 });
       },
       error: (err) => {
+        this.snackBar.open('Cập nhật trạng thái đơn hàng thất bại', 'Đóng', { duration: 2000 });
         console.error('Lỗi khi cập nhật trạng thái đơn hàng:', err);
       }
     });
   }
+  
   
 
 }

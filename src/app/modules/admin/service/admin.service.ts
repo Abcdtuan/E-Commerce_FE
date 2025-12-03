@@ -164,7 +164,12 @@ export class AdminService {
       headers: this.createAuthorizationHeader(),
     });
   }
-
+  getAllOrdersByName(name: any): Observable<any> {
+    return this.http.get(BASIC_URL + `/api/admin/order/search/${name}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+  
 
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(

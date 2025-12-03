@@ -6,23 +6,37 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+
+
 @Component({
   selector: 'app-order',
   standalone: true,
-  imports: [CommonModule, MatCardModule,MatTableModule,MatMenuModule, MatTabsModule],
+  imports: [CommonModule, MatCardModule,MatTableModule,MatMenuModule, MatTabsModule, MatIconModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatButtonModule],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
 export class OrderComponent {
 
+  searchOrders!: FormGroup;
   orders: any[] = [];
   selectedTab: number = 0;
 
   constructor(private adminService: AdminService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.searchOrders = this.fb.group({
+      name: [null, Validators.required]
+    })
     this.getAllOrders();
   }
 
@@ -77,5 +91,12 @@ export class OrderComponent {
       default: return this.orders;
     }
   }
+  submitSearch(){
+    const name = this.searchOrders.value.name;
+    this.adminService.getAllOrdersByName(name).subscribe(res =>{
+      this.orders = res;
+    })
+  }
+  
  
 }

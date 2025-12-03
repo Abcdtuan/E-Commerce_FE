@@ -51,6 +51,7 @@ export class ProductDetailComponent {
         ...res,
         images: images,
       }
+      console.log('Product:', this.product);
       this.currentImageIndex = 0;
         
     })

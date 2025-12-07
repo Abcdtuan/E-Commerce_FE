@@ -1,0 +1,22 @@
+<div class="analytics-products-container">
+  <h2>📊 Thống kê sản phẩm gần hết hàng</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ảnh</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá</th>
+        <th>Số lượng còn lại</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td><img [src]="p.processedImg" width="60"></td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.price | currency:'VND' }}</td>
+        <td>{{ p.stockQuantity }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

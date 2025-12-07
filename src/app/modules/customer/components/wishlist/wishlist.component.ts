@@ -42,11 +42,11 @@ export class WishlistComponent {
   addProductToCart(productId: number) {
     this.customerService.addProductToCart(productId).subscribe({
       next: (res) => {
-        this.snackBar.open('Thêm sản phẩm thành công!', 'Close', {
+        this.snackBar.open('Thêm sản phẩm thành công!', 'Đóng', {
           duration: 3000,
       })
     }, error: (error) => {
-      this.snackBar.open('Sản phẩm đã có trong giỏ hàng!', 'Close', {
+      this.snackBar.open('Sản phẩm đã có trong giỏ hàng!', 'Đóng', {
         duration: 3000
       });
       

@@ -121,7 +121,7 @@ export class PostProductComponent {
       this.adminService.addProduct(formData).subscribe({
         next: (res) => {
           if(res.id !== null){
-            this.snackbar.open("Product Added Successfully", "Close", {
+            this.snackbar.open("Thêm sản phẩm thành công", "Đóng", {
               duration: 3000,
             });
             this.route.navigate(['/admin/dashboard']);
@@ -140,7 +140,7 @@ export class PostProductComponent {
       this.adminService.createCategory(this.categoryForm.value).subscribe({
         next: (res) => {
           if(res != null){
-            this.snackbar.open("Category Created Successfully", "Close", {
+            this.snackbar.open("Tạo danh mục thành công", "Đóng", {
               duration: 3000,
             });
             this.getAllCategorys();
@@ -171,7 +171,7 @@ export class PostProductComponent {
   createBrand() {
     const categoryId = this.productForm.get('categoryId')?.value;
     if (!categoryId) {
-      this.snackbar.open("Vui lòng chọn danh mục trước khi thêm brand", "Close", { duration: 3000 });
+      this.snackbar.open("Vui lòng chọn danh mục trước khi thêm brand", "Đóng", { duration: 3000 });
       return;
     }
 
@@ -179,7 +179,7 @@ export class PostProductComponent {
       const payload = { ...this.brandForm.value, categoryId };
       this.adminService.createBrand(payload).subscribe(res => {
         if (res != null) {
-          this.snackbar.open("Brand Created Successfully", "Close", { duration: 3000 });
+          this.snackbar.open("Brand đã được tạo", "Đóng", { duration: 3000 });
           this.getBrandByCategory(categoryId);
           this.showBrandForm = false;
           this.brandForm.reset();

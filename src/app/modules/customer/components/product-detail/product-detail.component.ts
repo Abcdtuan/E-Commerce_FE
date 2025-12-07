@@ -22,7 +22,7 @@ export class ProductDetailComponent {
 
   productId!: number;
   product: any;
-
+  isOutOfStock = false;
   reviewList: any[] = []
   currentImageIndex: number = 0;
 
@@ -47,10 +47,14 @@ export class ProductDetailComponent {
       const images = res.byteImages.map((imgByte: string) => ({
         processedImg: 'data:image/jpeg;base64,' + imgByte
       }))
+      const remainingStock = Number(res.remainingStock ?? 0);
       this.product = {
         ...res,
         images: images,
+        remainingStock
+        
       }
+      this.isOutOfStock = remainingStock <= 0;
       console.log('Product:', this.product);
       this.currentImageIndex = 0;
         
@@ -68,7 +72,7 @@ export class ProductDetailComponent {
   addProductToCart(id: any) {
     const userId = UserStorageService.getToken(); 
     if (!userId) {
-    this.snackBar.open('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!', 'Close', {
+    this.snackBar.open('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!', 'Đóng', {
       duration: 5000,
     });
       return; 

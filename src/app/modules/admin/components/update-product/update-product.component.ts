@@ -133,7 +133,7 @@ export class UpdateProductComponent {
         this.adminService.updateProduct(this.productId,formData).subscribe({
           next: (res) => {
             if(res.id !== null){
-              this.snackbar.open("Product Added Successfully", "Close", {
+              this.snackbar.open("Cập nhật thành công", "Close", {
                 duration: 3000,
               });
               this.route.navigate(['/admin/dashboard']);
@@ -179,7 +179,7 @@ export class UpdateProductComponent {
       const payload = { ...this.brandForm.value, categoryId };
       this.adminService.createBrand(payload).subscribe(res => {
         if (res != null) {
-          this.snackbar.open("Brand Created Successfully", "Close", { duration: 3000 });
+          this.snackbar.open("Tạo brand thành công", "Close", { duration: 3000 });
           this.getBrandByCategory(categoryId);
           this.showBrandForm = false;
           this.brandForm.reset();

@@ -7,12 +7,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, MatButtonModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, CommonModule, MatButtonModule, MatCardModule],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })
@@ -45,7 +46,7 @@ export class ChangePasswordComponent {
         this.router.navigate(['/customer/profile'])
       },
       error: (err) => {
-        this.snackBar.open("Thay đổi mật khẩu không thành công: "  , "Close", {
+        this.snackBar.open("Thay đổi mật khẩu không thành công: "  , "Đóng", {
           duration: 2000,
         });
       }

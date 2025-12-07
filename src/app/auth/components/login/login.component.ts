@@ -44,6 +44,7 @@ export class LoginComponent {
     const password = this.loginForm.get('password')?.value;
     this.authService.login(username, password).subscribe({
       next: () =>{
+        this.snackBar.open('Đăng nhập thành công', 'Close', { duration: 3000 });
         if(UserStorageService.isAdminLoggedIn()){
           this.route.navigateByUrl('/admin/dashboard');
         }else if(UserStorageService.isCustomerLoggedIn()){
@@ -51,7 +52,7 @@ export class LoginComponent {
         };
       },
       error: () => {
-        this.snackBar.open('Login failed, Please try again', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        this.snackBar.open('Đăng nhập thất bại', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
       }
     })
   }

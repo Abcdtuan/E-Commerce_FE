@@ -23,7 +23,7 @@
                 <mat-icon>remove_circle_outline</mat-icon>
               </button>
               <span class="quantity">{{item.quantity}}</span>
-              <button mat-icon-button (click)="increaseQuantity(item.productId)">
+              <button mat-icon-button  [disabled]="item.quantity >= item.remainingStock" (click)="increaseQuantity(item.productId)">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
             </div>

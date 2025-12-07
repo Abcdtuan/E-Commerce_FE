@@ -1,0 +1,19 @@
+
+.analytics-products-container {
+  width: 80%;
+  margin: 20px auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+
+  img {
+    border-radius: 6px;
+  }
+}

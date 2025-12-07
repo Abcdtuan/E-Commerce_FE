@@ -111,11 +111,11 @@ export class CustomerDashboardComponent {
   addProductToCart(id: any) {
     this.customerService.addProductToCart(id).subscribe({
       next: (res) => {
-        this.snackBar.open('Thêm sản phẩm thành công!', 'Close', {
+        this.snackBar.open('Thêm sản phẩm thành công!', 'Đóng', {
           duration: 3000,
       })
     }, error: (error) => {
-      this.snackBar.open('Sản phẩm đã có trong giỏ hàng!', 'Close', {
+      this.snackBar.open('Sản phẩm đã có trong giỏ hàng!', 'Đóng', {
         duration: 3000
       });
       

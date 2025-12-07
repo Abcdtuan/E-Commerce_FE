@@ -40,6 +40,9 @@
 .order-status-card:nth-child(3) .status-avatar {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
+.order-status-card:nth-child(4) .status-avatar {
+    background: linear-gradient(135deg, #ff6b6b 0%, #c92a2a 100%);
+}
 
 .status-value {
     font-size: 32px;

@@ -13,6 +13,7 @@ import { UsersComponent } from './components/users/users.component';
 import { AnalyticsProductsComponent } from './components/analytics-products/analytics-products.component';
 import { ProuctDetailComponent } from './components/prouct-detail/prouct-detail.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { LowStockProdutsComponent } from './components/low-stock-produts/low-stock-produts.component';
 
 const routes: Routes = [
   {path:'dashboard',component: AdminDashboardComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'users', component: UsersComponent},
   {path: 'analytics-products', component: AnalyticsProductsComponent},
   {path:'product-detail/:productId', component: ProuctDetailComponent},
-  {path: 'payments', component: PaymentComponent}
+  {path: 'payments', component: PaymentComponent},
+  {path: 'low-stock-products', component: LowStockProdutsComponent}
   
 ];
 

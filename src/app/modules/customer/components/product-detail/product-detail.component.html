@@ -34,8 +34,13 @@
         <span>Đã bán: {{ product.totalSold }}</span>
       </div>
       <span class="separator" *ngIf="(product.averageRating || product.totalSold) && product.stockQuantity">|</span>
-      <div class="stock-quantity" *ngIf="product.stockQuantity">
-        <span>Còn lại: {{ product.remainingStock }}</span>
+      <div class="stock-quantity">
+        <span *ngIf="!isOutOfStock">
+          Còn lại: {{ product.remainingStock }}
+        </span>
+        <span *ngIf="isOutOfStock" class="text-danger">
+          Hết hàng
+        </span>
       </div>
     </div>
 
@@ -58,14 +63,14 @@
     </div>
      
     
-    <div class="action-buttons">
+    <div class="action-buttons" *ngIf="!isOutOfStock">
       <button mat-raised-button color="primary" (click)="addProductToCart(product.id)">
         Thêm vào giỏ hàng
       </button>
     </div>
      <div 
       class="out-of-stock-message" 
-      *ngIf="product.remainingStock === 0">
+      *ngIf="isOutOfStock">
       <span class="text-danger">
         Sản phẩm đã hết, vui lòng liên hệ lại hotline để biết thêm chi tiết.
       </span>

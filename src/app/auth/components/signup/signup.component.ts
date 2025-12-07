@@ -49,11 +49,11 @@ export class SignupComponent {
 
     this.authService.register(this.signupForm.value).subscribe({
       next: (response) => {
-        this.snackbar.open('Registration successful', 'Close', { duration: 5000 });
+        this.snackbar.open('Đăng ký thành công', 'Đóng', { duration: 5000 });
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        this.snackbar.open('Sign up failed, Please try again', 'Close', { duration: 5000, panelClass: 'error-snackbar' });
+        this.snackbar.open('Đăng ký thất bại', 'Đóng', { duration: 5000, panelClass: 'error-snackbar' });
       }
     });
   }

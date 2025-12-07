@@ -59,14 +59,14 @@ export class CartComponent {
   applyCoupon(couponId: number){
   this.customerService.applyCoupon(couponId).subscribe({
     next: (res) => {
-      this.snack.open("thêm mã giảm giá thành công","Oke",{
+      this.snack.open("thêm mã giảm giá thành công","Đóng",{
         duration: 3000
       });
       this.getCartByUserId();
     },
     error: (err) => {
       this.errorMessage = err.error?.message;
-      this.snack.open(this.errorMessage, "Oke", {
+      this.snack.open(this.errorMessage, "Đóng", {
       duration: 3000
      })
     }
